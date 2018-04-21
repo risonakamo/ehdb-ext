@@ -1,6 +1,52 @@
 @charset "UTF-8";
 
+html
+{
+    width: 100%;
+    height: 100%;
+}
+
 body
 {
+    width: 100%;
+    height: 100%;
     margin: 0;
+    background-color: #222222;
+    font-size: 0;
+}
+
+textarea
+{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: #191919;
+    color: white;
+    resize: none;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.gen-input
+{
+    width: 100%;
+    height: 20%;
+}
+
+.manual-input
+{
+    width: 50%;
+    height: 70%;
+}
+
+.manual-input.imgs
+{
+    background-color: #232c27;
+}
+
+.manual-input.tags
+{
+    background-color: #1c1f26;
 }
