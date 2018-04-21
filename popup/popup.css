@@ -6,3 +6,8 @@ body
     width: 500px;
     margin: 15px;
 }
+
+.result
+{
+    word-break: break-all;
+}
