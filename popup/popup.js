@@ -22,6 +22,11 @@ function main()
         infolinestring+="\n---------\n";
         infoline.innerText=infolinestring;
     });
+
+    document.querySelector(".combine-page").addEventListener("click",(e)=>{
+        e.preventDefault();
+        chrome.tabs.create({url:"combine/combine.html"});
+    });
 }
 
 //old main returned output as new line strings
