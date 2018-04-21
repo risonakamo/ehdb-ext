@@ -33,6 +33,7 @@ textarea
 {
     width: 100%;
     height: 20%;
+    word-break: break-all;
 }
 
 .manual-input
