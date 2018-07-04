@@ -3,8 +3,9 @@
 body
 {
     margin: 0;
-    width: 200px;
+    width: 260px;
     min-height: 300px;
+    max-height: 500px;
     background-color: #2d2d2d;
     color: white;
     font-size: 0;

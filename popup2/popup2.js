@@ -13,6 +13,10 @@ function main()
             tabbars.insertAdjacentHTML("beforeend",genTabBar(res[x]));
         }
 
+        var tabcounts=document.querySelectorAll(".tab-count .count");
+        tabcounts[0].innerText=_tabcount.known;
+        tabcounts[1].innerText=_tabcount.unknown;
+
         console.log(res);
     });
 }
