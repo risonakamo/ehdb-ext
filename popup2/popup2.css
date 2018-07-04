@@ -81,80 +81,81 @@ body
 {
     width: 70%;
     padding-left: 5px;
+    overflow-wrap: break-word;
 }
 
 /*-- tab bar colours --*/
-.bar.san,.bar.san:nth-of-type(2n) .title
+.bar.SAN,.bar.SAN:nth-of-type(2n) .title
 {
     background-color: #562819;
 }
 
-.bar.san .title
+.bar.SAN .title
 {
     background-color: #633220;
 }
 
-.bar.san:nth-of-type(2n)
+.bar.SAN:nth-of-type(2n)
 {
     background-color: #461e12;
 }
 
-.bar.pix,.bar.pix:nth-of-type(2n) .title
+.bar.PX,.bar.PX:nth-of-type(2n) .title
 {
     background-color: #092d57;
 }
 
-.bar.pix .title
+.bar.PX .title
 {
     background-color: #0c3764;
 }
 
-.bar.pix:nth-of-type(2n)
+.bar.PX:nth-of-type(2n)
 {
     background-color: #052246;
 }
 
-.bar.hitomi,.bar.hitomi:nth-of-type(2n) .title
+.bar.HIT,.bar.HIT:nth-of-type(2n) .title
 {
     background-color: #15191f;
 }
 
-.bar.hitomi .title
+.bar.HIT .title
 {
     background-color: #1b2028;
 }
 
-.bar.hitomi:nth-of-type(2n)
+.bar.HIT:nth-of-type(2n)
 {
     background-color: #0f1217;
 }
 
-.bar.nh,.bar.nh:nth-of-type(2n) .title
+.bar.NH,.bar.NH:nth-of-type(2n) .title
 {
     background-color: #520e18;
 }
 
-.bar.nh .title
+.bar.NH .title
 {
     background-color: #5f131f;
 }
 
-.bar.nh:nth-of-type(2n)
+.bar.NH:nth-of-type(2n)
 {
     background-color: #420911;
 }
 
-.bar.other,.bar.other:nth-of-type(2n) .title
+.bar.NONE,.bar.NONE:nth-of-type(2n) .title
 {
     background-color: #500d07;
 }
 
-.bar.other .title
+.bar.NONE .title
 {
     background-color: #5d110a;
 }
 
-.bar.other:nth-of-type(2n)
+.bar.NONE:nth-of-type(2n)
 {
     background-color: #400904;
 }
