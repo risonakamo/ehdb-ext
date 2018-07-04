@@ -86,7 +86,7 @@ function controlEvents()
 
     //save tabs
     buttons[0].addEventListener("click",(e)=>{
-        genTabBar();
+        storeCurrentTabs();
     });
 
     buttons[1].addEventListener("click",(e)=>{
