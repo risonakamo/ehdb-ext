@@ -1,23 +1,24 @@
 window.onload=main;
 
 var _tabcount={known:0,unknown:0};
+var _currentTabs;
 
 function main()
 {
     chrome.tabs.query({currentWindow:true},(tabs)=>{
         var tabbars=document.querySelector(".tab-bars");
-        var res=[];
+        _currentTabs=[];
         for (var x=0;x<tabs.length;x++)
         {
-            res.push(processTabjson(tabs[x]));
-            tabbars.insertAdjacentHTML("beforeend",genTabBar(res[x]));
+            _currentTabs.push(processTabjson(tabs[x]));
+            tabbars.insertAdjacentHTML("beforeend",genTabBar(_currentTabs[x]));
         }
 
         var tabcounts=document.querySelectorAll(".tab-count .count");
         tabcounts[0].innerText=_tabcount.known;
         tabcounts[1].innerText=_tabcount.unknown;
 
-        console.log(res);
+        console.log(_currentTabs);
     });
 }
 

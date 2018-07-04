@@ -4,8 +4,6 @@ body
 {
     margin: 0;
     width: 260px;
-    min-height: 300px;
-    max-height: 500px;
     background-color: #2d2d2d;
     color: white;
     font-size: 0;
@@ -18,7 +16,7 @@ body
     padding-top: 5px;
 }
 
-.tab-counts .tab-count
+.tab-counts .tab-count,.button
 {
     display: inline-block;
     width: 50%;
@@ -54,6 +52,9 @@ body
 .tab-bars
 {
     margin-top: 7px;
+    min-height: 255px;
+    max-height: 455px;
+    overflow: auto;
 }
 
 .bar
@@ -159,4 +160,16 @@ body
 .bar.NONE:nth-of-type(2n)
 {
     background-color: #400904;
+}
+
+/*-- button controls --*/
+.controls
+{
+    background-color: #101010;
+    height: 55px;
+}
+
+.button
+{
+    width: 33%;
 }
