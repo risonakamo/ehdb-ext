@@ -44,6 +44,11 @@ body
     text-align: center;
 }
 
+.tab-count.unknown
+{
+    color: #cd331c;
+}
+
 /*-- tab bar --*/
 .tab-bars
 {
