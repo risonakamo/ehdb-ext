@@ -5,6 +5,8 @@ var _currentTabs;
 
 function main()
 {
+    controlEvents();
+
     chrome.tabs.query({currentWindow:true},(tabs)=>{
         var tabbars=document.querySelector(".tab-bars");
         _currentTabs=[];
@@ -71,4 +73,23 @@ function genTabBar(tab)
 {
     //from popup2-tabbar-gen.html
     return `<div class="bar ${tab.type}"><div class="type">${tab.type}</div><div class="title">${tab.title}</div></div>`;
+}
+
+function storeCurrentTabs()
+{
+    chrome.storage.local.set({currentTabs:_currentTabs});
+}
+
+function controlEvents()
+{
+    var buttons=document.querySelectorAll(".button");
+
+    //save tabs
+    buttons[0].addEventListener("click",(e)=>{
+        genTabBar();
+    });
+
+    buttons[1].addEventListener("click",(e)=>{
+        chrome.tabs.create({active:false,url:"tabeditor/tabedit.html"});
+    });
 }

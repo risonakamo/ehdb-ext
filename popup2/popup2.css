@@ -172,4 +172,6 @@ body
 .button
 {
     width: 33%;
+    font-size: 10px;
+    cursor: pointer;
 }

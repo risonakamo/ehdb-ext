@@ -1,10 +1,10 @@
 {
     "manifest_version":2,
-    "name":"ehdb tab helper",
-    "version":"1.0",
-    "description":"help generate ehdb entries for pages of certain websites",
+    "name":"ehdb extend",
+    "version":"0.0",
+    "description":"ehdb2+ehdb tabhelper",
 
-    "permissions":["tabs"],
+    "permissions":["tabs","storage"],
 
     "browser_action":{
         "default_popup":"popup2/popup2.html"
