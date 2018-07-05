@@ -17,7 +17,7 @@ dl,dd
 .entry
 {
     width: 100%;
-    height: 25px;
+    min-height: 25px;
 }
 
 .entry dl

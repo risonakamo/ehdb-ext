@@ -49,8 +49,8 @@ class EntryHandler extends React.Component
     {
         for (var x=0;x<this.entries.length;x++)
         {
-            console.log(this.entries[x]);
-            // console.log(this.entries[x].genOutput());
+            // console.log(this.entries[x]);
+            console.log(this.entries[x].genOutput());
         }
     }
 
@@ -83,6 +83,7 @@ class Entry extends React.Component
         this.genOutput=this.genOutput.bind(this);
         this.focusTextBox=this.focusTextBox.bind(this);
         this.focusNextTextBox=this.focusNextTextBox.bind(this);
+        this.textPasteOverride=this.textPasteOverride.bind(this);
 
         // this.entryFields=Array(3).fill(React.createRef());
         this.entryFields=[React.createRef(),React.createRef(),React.createRef()];
@@ -98,9 +99,9 @@ class Entry extends React.Component
     genOutput()
     {
         var data=this.props.data;
-        data.title=this.entryFields[0].current.innerHTML;
-        data.imglink=this.entryFields[1].current.innerHTML;
-        data.tags=this.entryFields[2].current.innerHTML;
+        data.title=this.entryFields[0].current.innerText;
+        data.imglink=this.entryFields[1].current.innerText;
+        data.tags=this.entryFields[2].current.innerText;
 
         return data;
     }
@@ -122,6 +123,12 @@ class Entry extends React.Component
                 this.nextEntry.focusTextBox(boxnum);
             }
         }
+    }
+
+    textPasteOverride(e)
+    {
+        e.preventDefault();
+        document.execCommand("insertHTML",false,e.clipboardData.getData("text/plain"));
     }
 
     render()
@@ -156,7 +163,8 @@ class Entry extends React.Component
                         ref:this.entryFields[0],
                         onKeyDown:(e)=>{
                             this.focusNextTextBox(e,0);
-                        }
+                        },
+                        onPaste:this.textPasteOverride
                     },
                     this.props.data.title
                 ),
@@ -169,7 +177,8 @@ class Entry extends React.Component
                         ref:this.entryFields[1],
                         onKeyDown:(e)=>{
                             this.focusNextTextBox(e,1);
-                        }
+                        },
+                        onPaste:this.textPasteOverride
                     }
                 ),
 
@@ -181,7 +190,8 @@ class Entry extends React.Component
                         ref:this.entryFields[2],
                         onKeyDown:(e)=>{
                             this.focusNextTextBox(e,2);
-                        }
+                        },
+                        onPaste:this.textPasteOverride
                     }
                 )
             )
