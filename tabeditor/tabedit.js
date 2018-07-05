@@ -67,7 +67,32 @@ class EntryHandler extends React.Component
 
             this.props.data.map((x,i)=>{
                 return React.createElement(Entry,{data:x,key:i+1,index:i+1,ref:this.madeEntry});
-            })
+            }),
+
+            ReactDOM.createPortal(
+                [
+                    React.createElement(
+                        "div",
+                        {
+                            className:"button",
+                            onClick:this.getOutput,
+                            key:1
+                        },
+                        "save tabs"
+                    ),
+
+                    React.createElement(
+                        "div",
+                        {
+                            className:"button",
+                            key:2
+                        },
+                        "save to database"
+                    )
+                ],
+                document.querySelector(".controls")
+            )
+
         );
     }
 }
@@ -206,7 +231,8 @@ class Entry extends React.Component
                             this.focusNextTextBox(e,1);
                         },
                         onPaste:this.startArrayPaste
-                    }
+                    },
+                    this.props.data.imglink
                 ),
 
                 React.createElement(
@@ -219,7 +245,8 @@ class Entry extends React.Component
                             this.focusNextTextBox(e,2);
                         },
                         onPaste:this.textPasteOverride
-                    }
+                    },
+                    this.props.data.tags
                 )
             )
         );

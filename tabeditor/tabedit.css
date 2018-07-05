@@ -59,3 +59,21 @@ dl,dd
 {
     width: 40%;
 }
+
+/*-- controls --*/
+.controls
+{
+    height: 80px;
+    background-color: #101010;
+}
+
+.controls .button
+{
+    display: inline-block;
+    height: 100%;
+    width: 80px;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+}
