@@ -33,6 +33,7 @@ class EntryHandler extends React.Component
         this.element=React.createRef();
     }
 
+    //entry element callback
     madeEntry(ref)
     {
         if (this.entries.length>0)
@@ -43,6 +44,7 @@ class EntryHandler extends React.Component
         this.entries.push(ref);
     }
 
+    //produce the output
     getOutput()
     {
         for (var x=0;x<this.entries.length;x++)
