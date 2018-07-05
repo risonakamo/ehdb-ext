@@ -84,6 +84,8 @@ class Entry extends React.Component
         this.focusTextBox=this.focusTextBox.bind(this);
         this.focusNextTextBox=this.focusNextTextBox.bind(this);
         this.textPasteOverride=this.textPasteOverride.bind(this);
+        this.arrayPaste=this.arrayPaste.bind(this);
+        this.startArrayPaste=this.startArrayPaste.bind(this);
 
         // this.entryFields=Array(3).fill(React.createRef());
         this.entryFields=[React.createRef(),React.createRef(),React.createRef()];
@@ -112,6 +114,23 @@ class Entry extends React.Component
         this.entryFields[boxnum].current.focus();
     }
 
+    //given an array of strings, paste the first one and pass on the rest,
+    //only works for image link field right now
+    arrayPaste(pdata)
+    {
+        if (!pdata.length)
+        {
+            return;
+        }
+
+        this.entryFields[1].current.innerText=pdata.shift();
+
+        if (this.nextEntry)
+        {
+            this.nextEntry.arrayPaste(pdata);
+        }
+    }
+
     //focus one of the 3 input boxes, of the next entry, if there is one
     focusNextTextBox(e,boxnum)
     {
@@ -125,10 +144,18 @@ class Entry extends React.Component
         }
     }
 
+    //override paste event to plain paste
     textPasteOverride(e)
     {
         e.preventDefault();
         document.execCommand("insertHTML",false,e.clipboardData.getData("text/plain"));
+    }
+
+    //paste event override for image link box
+    startArrayPaste(e)
+    {
+        e.preventDefault();
+        this.arrayPaste(e.clipboardData.getData("text/plain").split("\n"));
     }
 
     render()
@@ -178,7 +205,7 @@ class Entry extends React.Component
                         onKeyDown:(e)=>{
                             this.focusNextTextBox(e,1);
                         },
-                        onPaste:this.textPasteOverride
+                        onPaste:this.startArrayPaste
                     }
                 ),
 

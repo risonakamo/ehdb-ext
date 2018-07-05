@@ -23,7 +23,7 @@ dl,dd
 .entry dl
 {
     display: flex;
-    min-height: 100%;
+    min-height: 25px;
 }
 
 .entry dd
