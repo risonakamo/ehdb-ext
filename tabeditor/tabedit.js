@@ -12,9 +12,9 @@ function main()
             data=[];
         }
 
-        _bob=React.createElement(EntryHandler,{data:data});
+        console.log(data);
 
-        ReactDOM.render(_bob,document.querySelector(".entries"));
+        ReactDOM.render(React.createElement(EntryHandler,{data:data}),document.querySelector(".entries"));
     });
 
 }
@@ -28,9 +28,15 @@ class EntryHandler extends React.Component
         super(props);
         this.madeEntry=this.madeEntry.bind(this);
         this.getOutput=this.getOutput.bind(this);
+        this.saveCurrentEntries=this.saveCurrentEntries.bind(this);
 
         this.entries=[];
         this.element=React.createRef();
+    }
+
+    componentDidMount()
+    {
+        this.element.current.getOutput=this.getOutput;
     }
 
     //entry element callback
@@ -44,19 +50,23 @@ class EntryHandler extends React.Component
         this.entries.push(ref);
     }
 
-    //produce the output
+    //returns the current output data
     getOutput()
     {
+        var res=[];
         for (var x=0;x<this.entries.length;x++)
         {
             // console.log(this.entries[x]);
-            console.log(this.entries[x].genOutput());
+            res.push(this.entries[x].genOutput());
         }
+
+        return res;
     }
 
-    componentDidMount()
+    //saves current edit progress to storage
+    saveCurrentEntries()
     {
-        this.element.current.getOutput=this.getOutput;
+        chrome.storage.local.set({currentTabs:this.getOutput()});
     }
 
     render()
@@ -75,7 +85,7 @@ class EntryHandler extends React.Component
                         "div",
                         {
                             className:"button",
-                            onClick:this.getOutput,
+                            onClick:this.saveCurrentEntries,
                             key:1
                         },
                         "save tabs"
