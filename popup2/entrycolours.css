@@ -1,5 +1,5 @@
 /*-- tab bar colours --*/
-.bar.SAN,.bar.SAN:nth-of-type(2n) .title,.entry.SAN,.entry.SAN:nth-of-type(2n) dd:nth-of-type(2n)
+.bar.SAN,.bar.SAN:nth-of-type(2n) .title,.entry.SAN dd,.entry.SAN:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #562819;
 }
@@ -9,7 +9,7 @@
     background-color: #633220;
 }
 
-.bar.SAN:nth-of-type(2n),.entry.SAN:nth-of-type(2n)
+.bar.SAN:nth-of-type(2n),.entry.SAN:nth-of-type(2n) dd
 {
     background-color: #461e12;
 }
