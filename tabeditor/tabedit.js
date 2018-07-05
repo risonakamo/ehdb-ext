@@ -12,8 +12,6 @@ function main()
             data=[];
         }
 
-        console.log(data);
-
         _bob=React.createElement(EntryHandler,{data:data});
 
         ReactDOM.render(_bob,document.querySelector(".entries"));
@@ -22,7 +20,7 @@ function main()
 }
 
 //EntryHandler(object data)
-//give it all the data
+//give it all the data as an object
 class EntryHandler extends React.Component
 {
     constructor(props)
@@ -37,6 +35,11 @@ class EntryHandler extends React.Component
 
     madeEntry(ref)
     {
+        if (this.entries.length>0)
+        {
+            this.entries[this.entries.length-1].setNextEntry(ref);
+        }
+
         this.entries.push(ref);
     }
 
@@ -44,7 +47,8 @@ class EntryHandler extends React.Component
     {
         for (var x=0;x<this.entries.length;x++)
         {
-            console.log(this.entries[x].genOutput());
+            console.log(this.entries[x]);
+            // console.log(this.entries[x].genOutput());
         }
     }
 
@@ -76,8 +80,16 @@ class Entry extends React.Component
         super(props);
         this.genOutput=this.genOutput.bind(this);
         this.focusTextBox=this.focusTextBox.bind(this);
+        this.focusNextTextBox=this.focusNextTextBox.bind(this);
 
+        // this.entryFields=Array(3).fill(React.createRef());
         this.entryFields=[React.createRef(),React.createRef(),React.createRef()];
+    }
+
+    //set the next entry of this entry
+    setNextEntry(entry)
+    {
+        this.nextEntry=entry;
     }
 
     //return output data of this entry
@@ -95,6 +107,19 @@ class Entry extends React.Component
     focusTextBox(boxnum)
     {
         this.entryFields[boxnum].current.focus();
+    }
+
+    //focus one of the 3 input boxes, of the next entry, if there is one
+    focusNextTextBox(e,boxnum)
+    {
+        if (e.key=="Enter")
+        {
+            e.preventDefault();
+            if (this.nextEntry)
+            {
+                this.nextEntry.focusTextBox(boxnum);
+            }
+        }
     }
 
     render()
@@ -123,18 +148,39 @@ class Entry extends React.Component
 
                 React.createElement(
                     "dd",
-                    {className:"title",contentEditable:"",ref:this.entryFields[0]},
+                    {
+                        className:"title",
+                        contentEditable:"",
+                        ref:this.entryFields[0],
+                        onKeyDown:(e)=>{
+                            this.focusNextTextBox(e,0);
+                        }
+                    },
                     this.props.data.title
                 ),
 
                 React.createElement(
                     "dd",
-                    {className:"img-link",contentEditable:"",ref:this.entryFields[1]}
+                    {
+                        className:"img-link",
+                        contentEditable:"",
+                        ref:this.entryFields[1],
+                        onKeyDown:(e)=>{
+                            this.focusNextTextBox(e,1);
+                        }
+                    }
                 ),
 
                 React.createElement(
                     "dd",
-                    {className:"tags",contentEditable:"",ref:this.entryFields[2]}
+                    {
+                        className:"tags",
+                        contentEditable:"",
+                        ref:this.entryFields[2],
+                        onKeyDown:(e)=>{
+                            this.focusNextTextBox(e,2);
+                        }
+                    }
                 )
             )
         );
