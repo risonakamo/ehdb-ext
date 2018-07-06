@@ -172,7 +172,7 @@ input
     height: 30px;
 }
 
-.edit-row .label,.edit-row .toggle
+.edit-row .label,.edit-row .toggle,.edit-row.buttons .button
 {
     display: inline-block;
     width: 24%;
@@ -208,4 +208,35 @@ input
 .edit-row .toggle:hover
 {
     background-color: rgba(255,255,255,.2);
+}
+
+.edit-row.buttons
+{
+    height: 45px;
+    margin-top: 5px;
+}
+
+.edit-row.buttons .button
+{
+    height: 100%;
+    padding-top: 9px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color .2s;
+    user-select: none;
+}
+
+.button:hover
+{
+    background-color: rgba(255,255,255,.2);
+}
+
+.button.delete:hover
+{
+    background-color: rgba(219,0,37,.45);
+}
+
+.edit-row.buttons .button.bigger
+{
+    width: 38%;
 }
