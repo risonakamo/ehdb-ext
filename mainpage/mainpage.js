@@ -66,7 +66,7 @@ class EntryBox extends React.Component
                 React.createElement(
                     "div",
                     {className:`img-box ${this.state.wide}`},
-                    React.createElement("img",{src:this.props.data.imglink,ref:this.imgElement})
+                    React.createElement("img",{src:this.props.data.imglink})
                 ),
 
                 React.createElement(
