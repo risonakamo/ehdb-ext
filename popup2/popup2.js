@@ -92,4 +92,8 @@ function controlEvents()
     buttons[1].addEventListener("click",(e)=>{
         chrome.tabs.create({url:"tabeditor/tabedit.html"});
     });
+
+    buttons[2].addEventListener("click",(e)=>{
+        chrome.tabs.create({url:"mainpage/mainpage.html"});
+    });
 }

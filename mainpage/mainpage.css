@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@font-face
+{
+    font-family: "ftbook";
+    src: url("/fonts/ftbook.otf");
+}
+
+body
+{
+    margin: 0;
+    font-size: 0;
+    color: white;
+    background-color: #2d2d2d;
+    font-family: "ftbook";
+}
+
+.entry-box
+{
+    width: 400px;
+    height: 200px;
+    background-color: rgb(34, 34, 34);
+}
+
+.entry-box .title
+{
+    width: 100%;
+    min-height: 40px;
+    background-color: grey;
+    font-size: 27px;
+    padding: 5px;
+    box-sizing: border-box;
+}
