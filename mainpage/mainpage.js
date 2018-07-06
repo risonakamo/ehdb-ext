@@ -10,7 +10,7 @@ function main()
 
         console.log(d.hdb);
 
-        ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
+        // ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
     });
 }
 

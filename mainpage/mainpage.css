@@ -27,6 +27,16 @@ a
     text-decoration: none;
 }
 
+input
+{
+    font-family: "ftbook";
+    border: 0;
+    padding: 0;
+    outline: none;
+    color: white;
+    background-color: transparent;
+}
+
 /*-- entry box --*/
 .entry-box
 {
@@ -148,9 +158,54 @@ a
 .slider-hold
 {
     overflow: hidden;
+    height: 200px;
 }
 
 .slider.edit-mode
 {
-    transform: translateY(-100%);
+    transform: translateY(-200px);
+}
+
+.edit-pane .edit-row
+{
+    width: 100%;
+    height: 30px;
+}
+
+.edit-row .label,.edit-row .toggle
+{
+    display: inline-block;
+    width: 24%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.edit-row input
+{
+    width: 70%;
+    height: 100%;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+.edit-row.type input
+{
+    width: 24%;
+    text-align: center;
+    padding-left: 0;
+}
+
+.edit-row .toggle
+{
+    width: auto;
+    padding: 0 4px 0 4px;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+}
+
+.edit-row .toggle:hover
+{
+    background-color: rgba(255,255,255,.2);
 }
