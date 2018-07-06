@@ -11,6 +11,7 @@ function main()
         console.log(d.hdb);
 
         // ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
+        ReactDOM.render(React.createElement(EditPane,{data:d.hdb[31],id:31}),document.querySelector(".edit-test"));
     });
 }
 
@@ -106,6 +107,7 @@ class EditPane extends React.Component
     constructor(props)
     {
         super(props);
+        this.toggleFit=this.toggleFit.bind(this);
 
         this.props.data.tags=this.props.data.tags.toString();
 
@@ -117,6 +119,23 @@ class EditPane extends React.Component
         {
             this.state.data.fit="TALL";
         }
+    }
+
+    toggleFit()
+    {
+        if (this.state.data.fit=="TALL")
+        {
+            this.state.data.fit="WIDE";
+        }
+
+        else
+        {
+            this.state.data.fit="TALL";
+        }
+
+        this.setState({data:this.state.data});
+
+        console.log(this.state.data);
     }
 
     render()
@@ -167,7 +186,10 @@ class EditPane extends React.Component
 
                 React.createElement(
                     "div",
-                    {className:"toggle"},
+                    {
+                        className:"toggle",
+                        onClick:this.toggleFit
+                    },
                     this.state.data.fit
                 )
             ),
