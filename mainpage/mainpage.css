@@ -203,6 +203,7 @@ input
     padding: 0 4px 0 4px;
     border-bottom: 2px solid white;
     cursor: pointer;
+    user-select: none;
 }
 
 .edit-row .toggle:hover
@@ -231,9 +232,19 @@ input
     background-color: rgba(255,255,255,.2);
 }
 
+.button:active
+{
+    background-color: rgba(255,255,255,.1);
+}
+
 .button.delete:hover
 {
     background-color: rgba(219,0,37,.45);
+}
+
+.button.delete:active
+{
+    background-color: rgba(219,0,37,.2);
 }
 
 .edit-row.buttons .button.bigger

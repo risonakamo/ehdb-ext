@@ -98,3 +98,89 @@ class EntryBox extends React.Component
         );
     }
 }
+
+//EditPane(object data,int id)
+//give it data object of thing to edit and ID
+class EditPane extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+
+        this.props.data.tags=this.props.data.tags.toString();
+
+        this.state={
+            data:this.props.data
+        };
+
+        if (!this.state.data.fit)
+        {
+            this.state.data.fit="TALL";
+        }
+    }
+
+    render()
+    {
+        return React.createElement(
+            "div",
+            {className:"edit-pane"},
+
+            React.createElement(
+                "div",
+                {className:"edit-row"},
+
+                React.createElement("div",{className:"label"},"title"),
+                React.createElement("input",{type:"text",value:this.state.data.title})
+            ),
+
+            React.createElement(
+                "div",
+                {className:"edit-row"},
+
+                React.createElement("div",{className:"label"},"image"),
+                React.createElement("input",{type:"text",value:this.state.data.imglink})
+            ),
+
+            React.createElement(
+                "div",
+                {className:"edit-row"},
+
+                React.createElement("div",{className:"label"},"url"),
+                React.createElement("input",{type:"text",value:this.state.data.url})
+            ),
+
+            React.createElement(
+                "div",
+                {className:"edit-row"},
+
+                React.createElement("div",{className:"label"},"tags"),
+                React.createElement("input",{type:"text",value:this.state.data.tags})
+            ),
+
+            React.createElement(
+                "div",
+                {className:"edit-row type"},
+
+                React.createElement("div",{className:"label"},"type"),
+                React.createElement("input",{type:"text",value:this.state.data.type}),
+                React.createElement("div",{className:"label"},"img fit"),
+
+                React.createElement(
+                    "div",
+                    {className:"toggle"},
+                    this.state.data.fit
+                )
+            ),
+
+            React.createElement(
+                "div",
+                {className:"edit-row buttons"},
+
+                React.createElement("div",{className:"button bigger"},"Save"),
+                React.createElement("div",{className:"button bigger"},"Cancel"),
+                React.createElement("div",{className:"button delete"},"Delete")
+            )
+
+        );
+    }
+}
