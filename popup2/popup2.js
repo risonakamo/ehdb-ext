@@ -90,6 +90,6 @@ function controlEvents()
     });
 
     buttons[1].addEventListener("click",(e)=>{
-        chrome.tabs.create({active:false,url:"tabeditor/tabedit.html"});
+        chrome.tabs.create({url:"tabeditor/tabedit.html"});
     });
 }

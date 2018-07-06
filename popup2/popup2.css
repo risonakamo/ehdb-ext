@@ -90,12 +90,19 @@ body
 .controls
 {
     background-color: #101010;
-    height: 55px;
 }
 
 .button
 {
-    width: 33%;
-    font-size: 10px;
+    width: 86px;
+    vertical-align: top;
+    padding-top: 3px;
     cursor: pointer;
+}
+
+.button>div
+{
+    font-size: 13px;
+    text-align: center;
+    padding-bottom: 8px;
 }
