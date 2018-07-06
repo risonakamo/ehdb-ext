@@ -22,6 +22,11 @@ function viewstorage()
     });
 }
 
+function clearHdb()
+{
+    chrome.storage.local.remove("hdb");
+}
+
 //EntryHandler(object data)
 //give it all the data as an object
 class EntryHandler extends React.Component
@@ -164,7 +169,7 @@ class Entry extends React.Component
         var data=this.props.data;
         data.title=this.entryFields[0].current.innerText;
         data.imglink=this.entryFields[1].current.innerText;
-        data.tags=this.entryFields[2].current.innerText;
+        data.tags=this.entryFields[2].current.innerText.split(",");
 
         return data;
     }
