@@ -37,12 +37,6 @@ class EntryHandler extends React.Component
         this.pushtoHdb=this.pushtoHdb.bind(this);
 
         this.entries=[];
-        this.element=React.createRef();
-    }
-
-    componentDidMount()
-    {
-        this.element.current.getOutput=this.getOutput;
     }
 
     //entry element callback
@@ -104,10 +98,7 @@ class EntryHandler extends React.Component
 
     render()
     {
-        return React.createElement(
-            "div",
-            {ref:this.element},
-
+        return [
             this.props.data.map((x,i)=>{
                 return React.createElement(Entry,{data:x,key:i+1,index:i+1,ref:this.madeEntry});
             }),
@@ -136,8 +127,7 @@ class EntryHandler extends React.Component
                 ],
                 document.querySelector(".controls")
             )
-
-        );
+        ];
     }
 }
 
