@@ -1,7 +1,5 @@
 window.onload=main;
 
-var _bob;
-
 function main()
 {
     chrome.storage.local.get("currentTabs",(data)=>{
@@ -19,6 +17,13 @@ function main()
 
 }
 
+function viewstorage()
+{
+    chrome.storage.local.get(null,(d)=>{
+        console.log(d);
+    });
+}
+
 //EntryHandler(object data)
 //give it all the data as an object
 class EntryHandler extends React.Component
@@ -29,6 +34,7 @@ class EntryHandler extends React.Component
         this.madeEntry=this.madeEntry.bind(this);
         this.getOutput=this.getOutput.bind(this);
         this.saveCurrentEntries=this.saveCurrentEntries.bind(this);
+        this.pushtoHdb=this.pushtoHdb.bind(this);
 
         this.entries=[];
         this.element=React.createRef();
@@ -69,6 +75,33 @@ class EntryHandler extends React.Component
         chrome.storage.local.set({currentTabs:this.getOutput()});
     }
 
+    //add current editted entries to the hdb
+    pushtoHdb()
+    {
+        var output=this.getOutput();
+
+        chrome.storage.local.get(["lastid","hdb"],(d)=>{
+            if (!d.lastid)
+            {
+                d.lastid=0;
+            }
+
+            if (!d.hdb)
+            {
+                d.hdb={};
+            }
+
+            var res={};
+            for (var x=0;x<output.length;x++)
+            {
+                d.lastid++;
+                d.hdb[d.lastid]=output[x];
+            }
+
+            chrome.storage.local.set(d);
+        });
+    }
+
     render()
     {
         return React.createElement(
@@ -95,6 +128,7 @@ class EntryHandler extends React.Component
                         "div",
                         {
                             className:"button",
+                            onClick:this.pushtoHdb,
                             key:2
                         },
                         "save to database"
