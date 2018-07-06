@@ -14,7 +14,7 @@
     background-color: #461e12;
 }
 
-.bar.SAN,.bar.PX:nth-of-type(2n) .title,.entry.PX dd,.entry.PX:nth-of-type(2n) dd:nth-of-type(2n)
+.bar.PX,.bar.PX:nth-of-type(2n) .title,.entry.PX dd,.entry.PX:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #092d57;
 }
@@ -29,7 +29,7 @@
     background-color: #052246;
 }
 
-.bar.SAN,.bar.HIT:nth-of-type(2n) .title,.entry.HIT dd,.entry.HIT:nth-of-type(2n) dd:nth-of-type(2n)
+.bar.HIT,.bar.HIT:nth-of-type(2n) .title,.entry.HIT dd,.entry.HIT:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #15191f;
 }
@@ -44,7 +44,7 @@
     background-color: #0f1217;
 }
 
-.bar.SAN,.bar.NH:nth-of-type(2n) .title,.entry.NH dd,.entry.NH:nth-of-type(2n) dd:nth-of-type(2n)
+.bar.NH,.bar.NH:nth-of-type(2n) .title,.entry.NH dd,.entry.NH:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #520e18;
 }
@@ -59,7 +59,7 @@
     background-color: #420911;
 }
 
-.bar.SAN,.bar.NONE:nth-of-type(2n) .title,.entry.NONE dd,.entry.NONE:nth-of-type(2n) dd:nth-of-type(2n)
+.bar.NONE,.bar.NONE:nth-of-type(2n) .title,.entry.NONE dd,.entry.NONE:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #500d07;
 }

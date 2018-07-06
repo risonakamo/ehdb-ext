@@ -10,9 +10,7 @@ function main()
             data=[];
         }
 
-        console.log(data);
-
-        ReactDOM.render(React.createElement(EntryHandler,{data:data}),document.querySelector(".entries"));
+        ReactDOM.render(React.createElement(EntryHandler,{data}),document.querySelector(".entries"));
     });
 
 }
