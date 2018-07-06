@@ -37,6 +37,7 @@ a
     background-color: #222222;
     border: 2px solid #2d2d2d;
     box-sizing: border-box;
+    vertical-align: top;
 }
 
 .entry-box .title
@@ -73,6 +74,18 @@ a
 .img-box img
 {
     height: 100%;
+    object-fit: cover;
+}
+
+.img-box.wide
+{
+    width: 50%;
+}
+
+.img-box.wide img
+{
+    height: auto;
+    width: 100%;
 }
 
 .entry-box .info>div

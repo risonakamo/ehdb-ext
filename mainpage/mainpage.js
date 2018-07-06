@@ -40,6 +40,13 @@ class EntryBoxHandler extends React.Component
 //give it a data entry and id seperate
 class EntryBox extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+
+        this.state={wide:""};
+    }
+
     render()
     {
         return React.createElement(
@@ -58,8 +65,8 @@ class EntryBox extends React.Component
 
                 React.createElement(
                     "div",
-                    {className:"img-box"},
-                    React.createElement("img",{src:this.props.data.imglink})
+                    {className:`img-box ${this.state.wide}`},
+                    React.createElement("img",{src:this.props.data.imglink,ref:this.imgElement})
                 ),
 
                 React.createElement(
