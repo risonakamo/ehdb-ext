@@ -21,6 +21,12 @@ body
     font-family: "ftbook";
 }
 
+a
+{
+    color: white;
+    text-decoration: none;
+}
+
 /*-- entry box --*/
 .entry-box
 {

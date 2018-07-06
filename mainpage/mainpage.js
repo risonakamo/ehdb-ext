@@ -46,7 +46,11 @@ class EntryBox extends React.Component
             "div",
             {className:`entry-box ${this.props.data.type}`},
 
-            React.createElement("div",{className:"title"},this.props.data.title),
+            React.createElement(
+                "a",
+                {href:this.props.data.url,target:"__blank"},
+                React.createElement("div",{className:"title"},this.props.data.title)
+            ),
 
             React.createElement(
                 "div",
@@ -55,11 +59,7 @@ class EntryBox extends React.Component
                 React.createElement(
                     "div",
                     {className:"img-box"},
-
-                    React.createElement(
-                        "img",
-                        {src:this.props.data.imglink}
-                    )
+                    React.createElement("img",{src:this.props.data.imglink})
                 ),
 
                 React.createElement(
