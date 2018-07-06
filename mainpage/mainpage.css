@@ -8,26 +8,78 @@
 
 body
 {
-    margin: 0;
+    margin: 30px;
     font-size: 0;
     color: white;
-    background-color: #2d2d2d;
+    background-color: #222222;
     font-family: "ftbook";
 }
 
+/*-- entry box --*/
 .entry-box
 {
     width: 400px;
-    height: 200px;
-    background-color: rgb(34, 34, 34);
+    min-height: 200px;
+    background-color: #222222;
+    border: 2px solid #2d2d2d;
+    box-sizing: border-box;
 }
 
 .entry-box .title
 {
     width: 100%;
     min-height: 40px;
-    background-color: grey;
-    font-size: 27px;
-    padding: 5px;
+    background-color: #2d2d2d;
+    font-size: 22px;
+    padding: 3px 5px 5px 15px;
     box-sizing: border-box;
+}
+
+.entry-box .bot-box
+{
+    height: 160px;
+}
+
+.entry-box .bot-box>div
+{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    vertical-align: top;
+}
+
+.bot-box .img-box
+{
+    text-align: center;
+    overflow: hidden;
+}
+
+.img-box img
+{
+    height: 100%;
+}
+
+.entry-box .info>div
+{
+    width: 100%;
+}
+
+.entry-box .info .tags
+{
+    height: 125px;
+}
+
+.entry-box .info .type
+{
+    height: 35px;
+}
+
+.tags .tag
+{
+    display: inline-block;
+    font-size: 19px;
+    padding: 2px 7px 2px 6px;
+    margin: 1.5px;
+    border-radius: 1.3px;
+    background-color: blueviolet;
 }
