@@ -143,3 +143,14 @@ a
     opacity: .1;
     user-select: none;
 }
+
+/*-- edit mode --*/
+.slider-hold
+{
+    overflow: hidden;
+}
+
+.slider.edit-mode
+{
+    transform: translateY(-100%);
+}
