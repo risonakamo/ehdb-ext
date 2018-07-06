@@ -110,7 +110,9 @@ class EntryHandler extends React.Component
                             onClick:this.saveCurrentEntries,
                             key:1
                         },
-                        "save tabs"
+
+                        React.createElement("img",{src:"/icons/saveentries.png"}),
+                        React.createElement("div",null,"Save Entries")
                     ),
 
                     React.createElement(
@@ -120,7 +122,9 @@ class EntryHandler extends React.Component
                             onClick:this.pushtoHdb,
                             key:2
                         },
-                        "save to database"
+
+                        React.createElement("img",{src:"/icons/savemain.png"}),
+                        React.createElement("div",null,"Save To HDB")
                     )
                 ],
                 document.querySelector(".controls")

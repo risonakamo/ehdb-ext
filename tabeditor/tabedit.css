@@ -65,15 +65,27 @@ dl,dd
 {
     height: 80px;
     background-color: #101010;
+    padding: 6px;
 }
 
 .controls .button
 {
     display: inline-block;
     height: 100%;
-    width: 80px;
+    width: 86px;
     font-size: 13px;
     text-align: center;
     vertical-align: top;
     cursor: pointer;
+    transition: opacity .2s;
+}
+
+.button:hover
+{
+    opacity: .7;
+}
+
+.button:active
+{
+    opacity: .5;
 }
