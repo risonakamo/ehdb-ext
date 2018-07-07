@@ -287,7 +287,13 @@ class Entry extends React.Component
                         },
                         onPaste:this.textPasteOverride
                     },
-                    this.props.data.tags
+
+                    (()=>{
+                        if (this.props.data.tags)
+                        {
+                            return this.props.data.tags.join(",");
+                        }
+                    })()
                 )
             )
         );
