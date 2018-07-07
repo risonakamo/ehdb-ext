@@ -138,50 +138,54 @@ class EditPane extends React.Component
         console.log(this.state.data);
     }
 
+    //text field change function. give it the event and the name of the
+    //data field that is changing (ie title,imglink,ect)
+    fieldChange(e,field)
+    {
+        this.state.data[field]=e.currentTarget.value;
+        this.setState({data:this.state.data});
+    }
+
     render()
     {
         return React.createElement(
             "div",
             {className:"edit-pane"},
 
-            React.createElement(
-                "div",
-                {className:"edit-row"},
+            [["title","title"],["image","imglink"],["url","url"],["tags","tags"]].map((x,i)=>{
+                return React.createElement(
+                    "div",
+                    {className:"edit-row",key:i},
 
-                React.createElement("div",{className:"label"},"title"),
-                React.createElement("input",{type:"text",value:this.state.data.title})
-            ),
-
-            React.createElement(
-                "div",
-                {className:"edit-row"},
-
-                React.createElement("div",{className:"label"},"image"),
-                React.createElement("input",{type:"text",value:this.state.data.imglink})
-            ),
-
-            React.createElement(
-                "div",
-                {className:"edit-row"},
-
-                React.createElement("div",{className:"label"},"url"),
-                React.createElement("input",{type:"text",value:this.state.data.url})
-            ),
-
-            React.createElement(
-                "div",
-                {className:"edit-row"},
-
-                React.createElement("div",{className:"label"},"tags"),
-                React.createElement("input",{type:"text",value:this.state.data.tags})
-            ),
+                    React.createElement("div",{className:"label"},x[0]),
+                    React.createElement(
+                        "input",
+                        {
+                            type:"text",
+                            value:this.state.data[x[1]],
+                            onChange:(e)=>{
+                                this.fieldChange(e,x[1]);
+                            }
+                        }
+                    )
+                );
+            }),
 
             React.createElement(
                 "div",
                 {className:"edit-row type"},
 
                 React.createElement("div",{className:"label"},"type"),
-                React.createElement("input",{type:"text",value:this.state.data.type}),
+                React.createElement(
+                    "input",
+                    {
+                        type:"text",
+                        value:this.state.data.type,
+                        onChange:(e)=>{
+                            this.fieldChange(e,"type");
+                        }
+                    }
+                ),
                 React.createElement("div",{className:"label"},"img fit"),
 
                 React.createElement(
