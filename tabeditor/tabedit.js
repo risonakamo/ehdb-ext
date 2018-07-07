@@ -38,6 +38,15 @@ class EntryHandler extends React.Component
         this.getOutput=this.getOutput.bind(this);
         this.saveCurrentEntries=this.saveCurrentEntries.bind(this);
         this.pushtoHdb=this.pushtoHdb.bind(this);
+        this.enterConfirmMode=this.enterConfirmMode.bind(this);
+
+        this.normalMenu=[["Save Entries","/icons/saveentries.png"],["Save To HDB","/icons/savemain.png"]];
+
+        this.state={
+            buttonState:this.normalMenu
+        };
+
+        this.saveConfirm=0;
 
         this.entries=[];
     }
@@ -69,6 +78,14 @@ class EntryHandler extends React.Component
     //saves current edit progress to storage
     saveCurrentEntries()
     {
+        if (this.saveConfirm)
+        {
+            this.pushtoHdb();
+            this.saveConfirm=0;
+            this.setState({buttonState:this.normalMenu});
+            return;
+        }
+
         chrome.storage.local.set({currentTabs:this.getOutput()});
     }
 
@@ -99,6 +116,20 @@ class EntryHandler extends React.Component
         });
     }
 
+    //begin confirm push to hdb sequence
+    enterConfirmMode()
+    {
+        if (this.saveConfirm)
+        {
+            this.saveConfirm=0;
+            this.setState({buttonState:this.normalMenu});
+            return;
+        }
+
+        this.setState({buttonState:[["Confirm Save",""],["Cancel Save",""]]});
+        this.saveConfirm=1;
+    }
+
     render()
     {
         return [
@@ -116,20 +147,20 @@ class EntryHandler extends React.Component
                             key:1
                         },
 
-                        React.createElement("img",{src:"/icons/saveentries.png"}),
-                        React.createElement("div",null,"Save Entries")
+                        React.createElement("img",{src:this.state.buttonState[0][1]}),
+                        React.createElement("div",null,this.state.buttonState[0][0])
                     ),
 
                     React.createElement(
                         "div",
                         {
                             className:"button",
-                            onClick:this.pushtoHdb,
+                            onClick:this.enterConfirmMode,
                             key:2
                         },
 
-                        React.createElement("img",{src:"/icons/savemain.png"}),
-                        React.createElement("div",null,"Save To HDB")
+                        React.createElement("img",{src:this.state.buttonState[1][1]}),
+                        React.createElement("div",null,this.state.buttonState[1][0])
                     )
                 ],
                 document.querySelector(".controls")
