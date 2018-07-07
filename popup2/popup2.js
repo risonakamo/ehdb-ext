@@ -104,8 +104,11 @@ class ButtonControl extends React.Component
     {
         super(props);
 
+        //menu text/button icon states to switch buttonState
         this.initialMenu=[["Tab Edit","/icons/tabedit.png"],["Main Page","/icons/mainpage.png"],""];
         this.confirmMenu=[["Confirm Save",""],["Cancel Save",""],"deselectable"];
+
+        //this.confirmMode=0
 
         this.state={
             buttonState:this.initialMenu
@@ -121,7 +124,13 @@ class ButtonControl extends React.Component
                     className:`button ${this.state.buttonState[2]}`,
                     key:0,
                     onClick:()=>{
+                        if (this.confirmMode)
+                        {
+                            return;
+                        }
+
                         this.setState({buttonState:this.confirmMenu});
+                        this.confirmMode=1;
                     }
                 },
 
@@ -135,6 +144,14 @@ class ButtonControl extends React.Component
                     className:"button",
                     key:1,
                     onClick:()=>{
+                        if (this.confirmMode)
+                        {
+                            this.setState({buttonState:this.initialMenu});
+                            this.confirmMode=0;
+                            storeCurrentTabs();
+                            return;
+                        }
+
                         chrome.tabs.create({url:"tabeditor/tabedit.html"});
                     }
                 },
@@ -149,6 +166,13 @@ class ButtonControl extends React.Component
                     className:"button",
                     key:2,
                     onClick:()=>{
+                        if (this.confirmMode)
+                        {
+                            this.setState({buttonState:this.initialMenu});
+                            this.confirmMode=0;
+                            return;
+                        }
+
                         chrome.tabs.create({url:"mainpage/mainpage.html"});
                     }
                 },
