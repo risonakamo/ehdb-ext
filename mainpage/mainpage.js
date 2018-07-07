@@ -44,13 +44,29 @@ class EntryBox extends React.Component
     constructor(props)
     {
         super(props);
+        this.updateData=this.updateData.bind(this);
+        this.enterEditMode=this.enterEditMode.bind(this);
 
-        this.state={wide:"",data:this.props.data};
+        this.state={
+            wide:"",
+            data:this.props.data,
+            editMode:""
+        };
 
         if (this.props.data.fit=="WIDE")
         {
             this.state.wide="wide";
         }
+    }
+
+    updateData(data)
+    {
+        this.setState({data});
+    }
+
+    enterEditMode()
+    {
+        this.setState({editMode:"edit-mode"});
     }
 
     render()
@@ -66,7 +82,7 @@ class EntryBox extends React.Component
             ),
 
             React.createElement("div",{className:"slider-hold"},
-                React.createElement("div",{className:"slider"},
+                React.createElement("div",{className:`slider ${this.state.editMode}`},
                     React.createElement("div",{className:"bot-box"},
 
                         React.createElement(
@@ -88,14 +104,17 @@ class EntryBox extends React.Component
                                 })
                             ),
 
+                            React.createElement("div",{className:"id-label"},`#${this.props.id}`),
+
                             React.createElement(
                                 "div",
-                                {className:"type"},
+                                {
+                                    className:"type",
+                                    onClick:this.enterEditMode
+                                },
 
                                 React.createElement("div",{className:"type-inside"},this.state.data.type)
-                            ),
-
-                            React.createElement("div",{className:"id-label"},`#${this.props.id}`)
+                            )
                         )
                     )
                 )
@@ -210,7 +229,6 @@ class EditPane extends React.Component
                 React.createElement("div",{className:"button bigger"},"Cancel"),
                 React.createElement("div",{className:"button delete"},"Delete")
             )
-
         );
     }
 }

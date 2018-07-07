@@ -128,8 +128,11 @@ input
 
 .info .type
 {
+    position: relative;
     height: 20%;
     text-align: center;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .type .type-inside
@@ -159,6 +162,11 @@ input
 {
     overflow: hidden;
     height: 200px;
+}
+
+.slider
+{
+    transition: transform .3s;
 }
 
 .slider.edit-mode
