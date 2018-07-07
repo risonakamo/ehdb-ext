@@ -11,7 +11,6 @@ function main()
         console.log(d.hdb);
 
         ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
-        ReactDOM.render(React.createElement(EditPane,{data:d.hdb[31],id:31}),document.querySelector(".edit-test"));
     });
 }
 
@@ -143,9 +142,10 @@ class EntryBox extends React.Component
                             return React.createElement(
                                 EditPane,
                                 {
-                                    data:this.state.data,
+                                    data:{...this.state.data},
                                     id:this.props.id,
-                                    updateParent:this.updateData
+                                    updateParent:this.updateData,
+                                    enteringEdit:this.state.editMode
                                 }
                             );
                         }
@@ -156,15 +156,17 @@ class EntryBox extends React.Component
     }
 }
 
-//EditPane(object data,int id,function updateParent)
+//EditPane(object data,int id,function updateParent,string enteringEdit)
 //give it data object of thing to edit and ID and the callback of the
-//parent to return from edit mode
+//parent to return from edit mode, and the edit mode string to say if its
+//entering edit mode
 class EditPane extends React.Component
 {
     constructor(props)
     {
         super(props);
         this.toggleFit=this.toggleFit.bind(this);
+        this.resetEdit=this.resetEdit.bind(this);
 
         this.state={
             data:{...this.props.data}
@@ -198,6 +200,19 @@ class EditPane extends React.Component
     {
         this.state.data[field]=e.currentTarget.value;
         this.setState({data:this.state.data});
+    }
+
+    //reset the edit to correct data hopefully (basically cancel)
+    resetEdit()
+    {
+        var data=this.props.data;
+
+        if (!data.fit)
+        {
+            data.fit="TALL";
+        }
+
+        this.setState({data});
     }
 
     render()
@@ -277,6 +292,7 @@ class EditPane extends React.Component
                     {
                         className:"button bigger",
                         onClick:()=>{
+                            this.resetEdit();
                             this.props.updateParent();
                         }
                     },
