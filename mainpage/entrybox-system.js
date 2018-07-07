@@ -114,6 +114,11 @@ class EntryBox extends React.Component
                                 "div",
                                 {className:"tags"},
                                 this.state.data.tags.map((x,i)=>{
+                                    if (x=="")
+                                    {
+                                        return;
+                                    }
+
                                     return React.createElement(
                                         "a",
                                         {className:"tag",key:i},
