@@ -61,7 +61,23 @@ class EntryBox extends React.Component
 
     updateData(data)
     {
-        this.setState({data});
+        if (data)
+        {
+            var fit;
+            if (data.fit=="TALL")
+            {
+                fit="";
+            }
+
+            else
+            {
+                fit="wide";
+            }
+
+            this.setState({data:data,wide:fit});
+        }
+
+        this.setState({editMode:""});
     }
 
     enterEditMode()
@@ -116,6 +132,15 @@ class EntryBox extends React.Component
                                 React.createElement("div",{className:"type-inside"},this.state.data.type)
                             )
                         )
+                    ),
+
+                    React.createElement(
+                        EditPane,
+                        {
+                            data:this.state.data,
+                            id:this.props.id,
+                            updateParent:this.updateData
+                        }
                     )
                 )
             )
@@ -123,8 +148,9 @@ class EntryBox extends React.Component
     }
 }
 
-//EditPane(object data,int id)
-//give it data object of thing to edit and ID
+//EditPane(object data,int id,function updateParent)
+//give it data object of thing to edit and ID and the callback of the
+//parent to return from edit mode
 class EditPane extends React.Component
 {
     constructor(props)
@@ -132,10 +158,8 @@ class EditPane extends React.Component
         super(props);
         this.toggleFit=this.toggleFit.bind(this);
 
-        this.props.data.tags=this.props.data.tags.toString();
-
         this.state={
-            data:this.props.data
+            data:{...this.props.data}
         };
 
         if (!this.state.data.fit)
@@ -144,6 +168,7 @@ class EditPane extends React.Component
         }
     }
 
+    //toggle img fit button function
     toggleFit()
     {
         if (this.state.data.fit=="TALL")
@@ -225,8 +250,33 @@ class EditPane extends React.Component
                 "div",
                 {className:"edit-row buttons"},
 
-                React.createElement("div",{className:"button bigger"},"Save"),
-                React.createElement("div",{className:"button bigger"},"Cancel"),
+                React.createElement(
+                    "div",
+                    {
+                        className:"button bigger",
+                        onClick:()=>{
+                            if (!Array.isArray(this.state.data.tags))
+                            {
+                                this.state.data.tags=this.state.data.tags.split(",");
+                            }
+
+                            this.props.updateParent(this.state.data);
+                        }
+                    },
+                    "Save"
+                ),
+
+                React.createElement(
+                    "div",
+                    {
+                        className:"button bigger",
+                        onClick:()=>{
+                            this.props.updateParent();
+                        }
+                    },
+                    "Cancel"
+                ),
+
                 React.createElement("div",{className:"button delete"},"Delete")
             )
         );
