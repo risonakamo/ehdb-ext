@@ -5,7 +5,7 @@ var _currentTabs;
 
 function main()
 {
-    controlEvents();
+    ReactDOM.render(React.createElement(ButtonControl),document.querySelector(".controls"));
 
     chrome.tabs.query({currentWindow:true},(tabs)=>{
         var tabbars=document.querySelector(".tab-bars");
@@ -96,4 +96,66 @@ function controlEvents()
     buttons[2].addEventListener("click",(e)=>{
         chrome.tabs.create({url:"mainpage/mainpage.html"});
     });
+}
+
+class ButtonControl extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+
+        this.initialMenu=[["Tab Edit","/icons/tabedit.png"],["Main Page","/icons/mainpage.png"],""];
+        this.confirmMenu=[["Confirm Save",""],["Cancel Save",""],"deselectable"];
+
+        this.state={
+            buttonState:this.initialMenu
+        };
+    }
+
+    render()
+    {
+        return [
+            React.createElement(
+                "div",
+                {
+                    className:`button ${this.state.buttonState[2]}`,
+                    key:0,
+                    onClick:()=>{
+                        this.setState({buttonState:this.confirmMenu});
+                    }
+                },
+
+                React.createElement("img",{src:"/icons/savetabs.png"}),
+                React.createElement("div",null,"Save Tabs")
+            ),
+
+            React.createElement(
+                "div",
+                {
+                    className:"button",
+                    key:1,
+                    onClick:()=>{
+                        chrome.tabs.create({url:"tabeditor/tabedit.html"});
+                    }
+                },
+
+                React.createElement("img",{src:this.state.buttonState[0][1]}),
+                React.createElement("div",null,this.state.buttonState[0][0])
+            ),
+
+            React.createElement(
+                "div",
+                {
+                    className:"button",
+                    key:2,
+                    onClick:()=>{
+                        chrome.tabs.create({url:"mainpage/mainpage.html"});
+                    }
+                },
+
+                React.createElement("img",{src:this.state.buttonState[1][1]}),
+                React.createElement("div",null,this.state.buttonState[1][0])
+            )
+        ];
+    }
 }

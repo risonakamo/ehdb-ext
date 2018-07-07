@@ -117,3 +117,9 @@ body
 {
     opacity: .5;
 }
+
+.button.deselectable
+{
+    opacity: .5;
+    cursor: default;
+}
