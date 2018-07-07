@@ -78,6 +78,8 @@ class EntryBox extends React.Component
     deleteSelf()
     {
         this.setState({dead:1});
+        delete _hdb[this.props.id];
+        chrome.storage.local.set({hdb:_hdb});
     }
 
     render()
