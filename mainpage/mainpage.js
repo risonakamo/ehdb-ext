@@ -45,7 +45,7 @@ class EntryBox extends React.Component
     {
         super(props);
 
-        this.state={wide:""};
+        this.state={wide:"",data:this.props.data};
 
         if (this.props.data.fit=="WIDE")
         {
@@ -57,12 +57,12 @@ class EntryBox extends React.Component
     {
         return React.createElement(
             "div",
-            {className:`entry-box ${this.props.data.type}`},
+            {className:`entry-box ${this.state.data.type}`},
 
             React.createElement(
                 "a",
                 {href:this.props.data.url,target:"__blank"},
-                React.createElement("div",{className:"title"},this.props.data.title)
+                React.createElement("div",{className:"title"},this.state.data.title)
             ),
 
             React.createElement("div",{className:"slider-hold"},
@@ -72,14 +72,14 @@ class EntryBox extends React.Component
                         React.createElement(
                             "div",
                             {className:`img-box ${this.state.wide}`},
-                            React.createElement("img",{src:this.props.data.imglink})
+                            React.createElement("img",{src:this.state.data.imglink})
                         ),
 
                         React.createElement("div",{className:"info"},
                             React.createElement(
                                 "div",
                                 {className:"tags"},
-                                this.props.data.tags.map((x,i)=>{
+                                this.state.data.tags.map((x,i)=>{
                                     return React.createElement(
                                         "a",
                                         {className:"tag",key:i},
@@ -92,7 +92,7 @@ class EntryBox extends React.Component
                                 "div",
                                 {className:"type"},
 
-                                React.createElement("div",{className:"type-inside"},this.props.data.type)
+                                React.createElement("div",{className:"type-inside"},this.state.data.type)
                             ),
 
                             React.createElement("div",{className:"id-label"},`#${this.props.id}`)
