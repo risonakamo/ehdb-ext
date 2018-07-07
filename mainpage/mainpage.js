@@ -57,6 +57,8 @@ class EntryBox extends React.Component
         {
             this.state.wide="wide";
         }
+
+        this.spawnedEditBox=0;
     }
 
     updateData(data)
@@ -83,6 +85,7 @@ class EntryBox extends React.Component
     enterEditMode()
     {
         this.setState({editMode:"edit-mode"});
+        this.spawnedEditBox=1;
     }
 
     render()
@@ -134,14 +137,19 @@ class EntryBox extends React.Component
                         )
                     ),
 
-                    React.createElement(
-                        EditPane,
+                    (()=>{
+                        if (this.state.editMode=="edit-mode" || this.spawnedEditBox)
                         {
-                            data:this.state.data,
-                            id:this.props.id,
-                            updateParent:this.updateData
+                            return React.createElement(
+                                EditPane,
+                                {
+                                    data:this.state.data,
+                                    id:this.props.id,
+                                    updateParent:this.updateData
+                                }
+                            );
                         }
-                    )
+                    })()
                 )
             )
         );
@@ -182,8 +190,6 @@ class EditPane extends React.Component
         }
 
         this.setState({data:this.state.data});
-
-        console.log(this.state.data);
     }
 
     //text field change function. give it the event and the name of the
