@@ -10,7 +10,7 @@ function main()
 
         console.log(d.hdb);
 
-        // ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
+        ReactDOM.render(React.createElement(EntryBoxHandler,{data:d.hdb}),document.querySelector(".entries"));
         ReactDOM.render(React.createElement(EditPane,{data:d.hdb[31],id:31}),document.querySelector(".edit-test"));
     });
 }
@@ -46,6 +46,11 @@ class EntryBox extends React.Component
         super(props);
 
         this.state={wide:""};
+
+        if (this.props.data.fit=="WIDE")
+        {
+            this.state.wide="wide";
+        }
     }
 
     render()
@@ -60,40 +65,39 @@ class EntryBox extends React.Component
                 React.createElement("div",{className:"title"},this.props.data.title)
             ),
 
-            React.createElement(
-                "div",
-                {className:"bot-box"},
+            React.createElement("div",{className:"slider-hold"},
+                React.createElement("div",{className:"slider"},
+                    React.createElement("div",{className:"bot-box"},
 
-                React.createElement(
-                    "div",
-                    {className:`img-box ${this.state.wide}`},
-                    React.createElement("img",{src:this.props.data.imglink})
-                ),
+                        React.createElement(
+                            "div",
+                            {className:`img-box ${this.state.wide}`},
+                            React.createElement("img",{src:this.props.data.imglink})
+                        ),
 
-                React.createElement(
-                    "div",
-                    {className:"info"},
+                        React.createElement("div",{className:"info"},
+                            React.createElement(
+                                "div",
+                                {className:"tags"},
+                                this.props.data.tags.map((x,i)=>{
+                                    return React.createElement(
+                                        "a",
+                                        {className:"tag",key:i},
+                                        `${x.toUpperCase()}`
+                                    );
+                                })
+                            ),
 
-                    React.createElement(
-                        "div",
-                        {className:"tags"},
-                        this.props.data.tags.map((x,i)=>{
-                            return React.createElement(
-                                "a",
-                                {className:"tag",key:i},
-                                `${x.toUpperCase()}`
-                            );
-                        })
-                    ),
+                            React.createElement(
+                                "div",
+                                {className:"type"},
 
-                    React.createElement(
-                        "div",
-                        {className:"type"},
+                                React.createElement("div",{className:"type-inside"},this.props.data.type)
+                            ),
 
-                        React.createElement("div",{className:"type-inside"},this.props.data.type)
-                    ),
-
-                    React.createElement("div",{className:"id-label"},`#${this.props.id}`)
+                            React.createElement("div",{className:"id-label"},`#${this.props.id}`)
+                        )
+                    )
                 )
             )
         );
