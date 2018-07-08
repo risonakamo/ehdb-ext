@@ -126,7 +126,7 @@ class EntryHandler extends React.Component
             return;
         }
 
-        this.setState({buttonState:[["Confirm Save",""],["Cancel Save",""]]});
+        this.setState({buttonState:[["Confirm Save","/icons/confirm.png"],["Cancel Save","/icons/naw.png"]]});
         this.saveConfirm=1;
     }
 

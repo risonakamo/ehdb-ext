@@ -106,7 +106,7 @@ class ButtonControl extends React.Component
 
         //menu text/button icon states to switch buttonState
         this.initialMenu=[["Tab Edit","/icons/tabedit.png"],["Main Page","/icons/mainpage.png"],""];
-        this.confirmMenu=[["Confirm Save",""],["Cancel Save",""],"deselectable"];
+        this.confirmMenu=[["Confirm Save","/icons/confirm.png"],["Cancel Save","/icons/naw.png"],"deselectable"];
 
         //this.confirmMode=0
 
