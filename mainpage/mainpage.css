@@ -114,6 +114,7 @@ input
     height: 80%;
     padding: 2px 5px 2px 5px;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .tags .tag

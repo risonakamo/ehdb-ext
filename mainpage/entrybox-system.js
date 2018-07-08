@@ -51,7 +51,9 @@ class EntryBox extends React.Component
     {
         if (data)
         {
+            data={...data};
             var fit;
+
             if (data.fit=="TALL")
             {
                 fit="";
@@ -62,7 +64,10 @@ class EntryBox extends React.Component
                 fit="wide";
             }
 
-            this.setState({data:data,wide:fit});
+            this.setState({data,wide:fit});
+
+            _hdb[this.props.id]=data;
+            chrome.storage.local.set({hdb:_hdb});
         }
 
         this.setState({editMode:""});
@@ -75,6 +80,7 @@ class EntryBox extends React.Component
         this.spawnedEditBox=1;
     }
 
+    //delete self element and entry in hdb
     deleteSelf()
     {
         this.setState({dead:1});

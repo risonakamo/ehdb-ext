@@ -56,7 +56,9 @@ class EditPane extends React.Component
             data.fit="TALL";
         }
 
-        this.setState({data});
+        this.setState({data},()=>{
+            this.props.updateParent();
+        });
     }
 
     render()
@@ -137,7 +139,6 @@ class EditPane extends React.Component
                         className:"button bigger",
                         onClick:()=>{
                             this.resetEdit();
-                            this.props.updateParent();
                         }
                     },
                     "Cancel"
