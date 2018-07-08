@@ -13,6 +13,8 @@ class EntryBoxHandler extends React.Component
                     EntryBox,
                     {data:this.props.data[x],id:x,key:x}
                 ));
+
+                countTag(this.props.data[x].tags);
             }
 
             return res;
@@ -47,6 +49,7 @@ class EntryBox extends React.Component
     }
 
     //perform data update given data object
+    //and also cleans up the data a bit before entry
     updateData(data)
     {
         if (data)
@@ -66,6 +69,13 @@ class EntryBox extends React.Component
 
             this.setState({data,wide:fit});
 
+            if (data.tags.length==1 && data.tags[0]=="")
+            {
+                data.tags=[];
+            }
+
+            countTag(data.tags,_hdb[this.props.id].tags);
+
             _hdb[this.props.id]=data;
             chrome.storage.local.set({hdb:_hdb});
         }
@@ -84,6 +94,7 @@ class EntryBox extends React.Component
     deleteSelf()
     {
         this.setState({dead:1});
+        countTag([],_hdb[this.props.id].tags);
         delete _hdb[this.props.id];
         chrome.storage.local.set({hdb:_hdb});
     }
