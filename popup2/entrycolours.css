@@ -1,4 +1,4 @@
-/*-- tab bar colours --*/
+/*-- main three colours --*/
 .bar.SAN,.bar.SAN:nth-of-type(2n) .title,.entry.SAN dd,.entry.SAN:nth-of-type(2n) dd:nth-of-type(2n)
 {
     background-color: #562819;
@@ -74,6 +74,7 @@
     background-color: #400904;
 }
 
+/*-- entry box borders --*/
 .entry-box.SAN
 {
     border: 2px solid #633220;
@@ -97,4 +98,30 @@
 .entry-box.NONE
 {
     border: 2px solid #5d110a;
+}
+
+/*-- tag colours --*/
+.entry-box.SAN .tag
+{
+    background-color: #fe7431;
+}
+
+.entry-box.PX .tag
+{
+    background-color: #1198f6;
+}
+
+.entry-box.HIT .tag
+{
+    background-color: #d45049;
+}
+
+.entry-box.NH .tag
+{
+    background-color: #eb2955;
+}
+
+.entry-box.NONE .tag
+{
+    background-color: #171717;
 }
