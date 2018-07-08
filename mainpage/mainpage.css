@@ -128,7 +128,7 @@ input
     overflow: auto;
 }
 
-.tags .tag,.menu-group li
+.tags .tag,.menu-group li>span
 {
     display: inline-block;
     font-size: 19px;
@@ -298,6 +298,8 @@ input
 .menu-group li
 {
     display: inline-block;
+    border-radius: 4px;
+    transition: transform .2s,background-color .2s;
 }
 
 .menu-group li .amount-label
@@ -311,4 +313,34 @@ input
     border-right: 1px solid white;
     box-sizing: border-box;
     overflow-wrap: break-word;
+}
+
+.menu-group li.selected
+{
+    display: flex;
+    padding: 2px 10px 2px 10px;
+    background-color: #181818;
+    align-items: center;
+}
+
+.menu-group li.selected::before
+{
+    content: "●";
+    font-size: 18px;
+    height: 100%;
+    display: inline-block;
+    padding: 0 5px 0 0px;
+    height: 100%;
+    display: inline-block;
+    color: blueviolet;
+}
+
+li.shuffle
+{
+    display: block;
+}
+
+li.shuffle.shuffle-selected
+{
+    padding-left: 10px;
 }
