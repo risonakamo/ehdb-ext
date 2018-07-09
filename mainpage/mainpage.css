@@ -12,6 +12,11 @@
     src: url("/fonts/ftbooki.otf");
 }
 
+html
+{
+    height: 100%;
+}
+
 body
 {
     display: flex;
@@ -20,6 +25,7 @@ body
     color: white;
     background-color: #222222;
     font-family: "ftbook";
+    height: 100%;
 }
 
 a
@@ -41,6 +47,8 @@ input
 .entries
 {
     flex: 1;
+    height: 100%;
+    overflow: auto;
 }
 
 .menu-bar
