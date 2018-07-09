@@ -2,23 +2,58 @@
 //give it the whole database
 class EntryBoxHandler extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+        this.tagsReady=this.tagsReady.bind(this);
+
+        this.state={
+            //tagsReady:0 doesnt need to exist
+        };
+    }
+
+    tagsReady()
+    {
+        if (!this.state.tagsReady)
+        {
+            this.setState({tagsReady:1});
+        }
+    }
+
+    componentWillMount()
+    {
+        this.tagsReady();
+    }
+
     render()
     {
-        return (()=>{
-            var res=[];
+        return [
+            (()=>{
+                var res=[];
 
-            for (var x in this.props.data)
-            {
-                res.push(React.createElement(
-                    EntryBox,
-                    {data:this.props.data[x],id:x,key:x}
-                ));
+                for (var x in this.props.data)
+                {
+                    res.push(React.createElement(
+                        EntryBox,
+                        {data:this.props.data[x],id:x,key:x}
+                    ));
 
-                countTag(this.props.data[x].tags);
-            }
+                    countTag(this.props.data[x].tags);
+                }
 
-            return res;
-        })();
+                console.log("hey");
+                return res;
+            })(),
+
+            (()=>{
+                if (this.state.tagsReady)
+                {
+                    return ReactDOM.createPortal(React.createElement(TagMenu,{tags:_tags}),document.querySelector(".menu-group"))
+                }
+
+                return null;
+            })()
+        ];
     }
 }
 
@@ -37,7 +72,7 @@ class EntryBox extends React.Component
             wide:"",
             data:this.props.data,
             editMode:""
-            //dead:0
+            //dead:0 doesnt need to exist
         };
 
         if (this.props.data.fit=="WIDE")
