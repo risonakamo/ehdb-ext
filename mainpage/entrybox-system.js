@@ -7,10 +7,13 @@ class EntryBoxHandler extends React.Component
         super(props);
         this.tagsReady=this.tagsReady.bind(this);
         this.updateTags=this.updateTags.bind(this);
+        this.shuffleEntries=this.shuffleEntries.bind(this);
 
         this.state={
-            //tagsReady:0 doesnt need to exist
-            tags:{}
+            //tagsReady:0
+            //shuffleActive:0
+            tags:{},
+            data:this.props.data
         };
     }
 
@@ -62,23 +65,33 @@ class EntryBoxHandler extends React.Component
         this.setState({tags:stateTags});
     }
 
+    shuffleEntries()
+    {
+        this.setState({shuffleActive:1});
+    }
+
     render()
     {
         return [
             (()=>{
                 var res=[];
 
-                for (var x in this.props.data)
+                for (var x in this.state.data)
                 {
                     res.push(React.createElement(
                         EntryBox,
-                        {data:this.props.data[x],id:x,key:x,updateTags:this.updateTags}
+                        {data:this.state.data[x],id:x,key:x,updateTags:this.updateTags}
                     ));
 
                     if (!this.state.tagsReady)
                     {
-                        this.updateTags(this.props.data[x].tags);
+                        this.updateTags(this.state.data[x].tags);
                     }
+                }
+
+                if (this.state.shuffleActive)
+                {
+                    randomiseArray(res);
                 }
 
                 console.log("hey");
@@ -88,7 +101,10 @@ class EntryBoxHandler extends React.Component
             (()=>{
                 if (this.state.tagsReady)
                 {
-                    return ReactDOM.createPortal(React.createElement(TagMenu,{tags:this.state.tags}),document.querySelector(".menu-group"))
+                    return ReactDOM.createPortal(React.createElement(
+                        TagMenu,
+                        {tags:this.state.tags,shuffleEntries:this.shuffleEntries}
+                    ),document.querySelector(".menu-group"));
                 }
 
                 return null;

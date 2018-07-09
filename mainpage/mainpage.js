@@ -17,3 +17,21 @@ function main()
         ReactDOM.render(React.createElement(EntryBoxHandler,{data:_hdb}),document.querySelector(".entries"));
     });
 }
+
+function randomiseArray(array)
+{
+    var t;
+    var ri;
+    for (var x=array.length-1;x>0;x--)
+    {
+        ri=randint(0,x);
+        t=array[x];
+        array[x]=array[ri];
+        array[ri]=t;
+    }
+}
+
+function randint(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1))+min;
+}

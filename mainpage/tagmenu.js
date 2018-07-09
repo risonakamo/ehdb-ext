@@ -1,4 +1,4 @@
-//TagMenu(object tags)
+//TagMenu(object tags,function shuffleEntries)
 //give it the tags object with all the tags
 class TagMenu extends React.Component
 {
@@ -7,7 +7,11 @@ class TagMenu extends React.Component
         return [
             React.createElement(
                 "li",
-                {className:"shuffle"},
+                {
+                    className:"shuffle",
+                    onClick:this.props.shuffleEntries,
+                    key:"shuffle"
+                },
 
                 React.createElement("span",null,
                     React.createElement("div",{className:"amount-label"},"⟲"),
