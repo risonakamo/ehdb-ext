@@ -1,5 +1,5 @@
 //TagMenu(object tags)
-//tags: the _tags object
+//give it the tags object with all the tags
 class TagMenu extends React.Component
 {
     render()

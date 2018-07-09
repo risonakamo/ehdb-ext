@@ -6,9 +6,11 @@ class EntryBoxHandler extends React.Component
     {
         super(props);
         this.tagsReady=this.tagsReady.bind(this);
+        this.updateTags=this.updateTags.bind(this);
 
         this.state={
             //tagsReady:0 doesnt need to exist
+            tags:{}
         };
     }
 
@@ -20,9 +22,44 @@ class EntryBoxHandler extends React.Component
         }
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         this.tagsReady();
+    }
+
+    //update tags object
+    //first array of tags will be counted, 2nd will be un-counted
+    updateTags(tags,oldTags)
+    {
+        var currentTag;
+        var stateTags=this.state.tags;
+
+        for (var x=0,l=tags.length;x<l;x++)
+        {
+            currentTag=tags[x];
+            if (!stateTags[currentTag])
+            {
+                stateTags[currentTag]=1;
+            }
+
+            else
+            {
+                stateTags[currentTag]++;
+            }
+        }
+
+        if (!oldTags)
+        {
+            return;
+        }
+
+        for (var x=0,l=oldTags.length;x<l;x++)
+        {
+            stateTags[oldTags[x]]--;
+        }
+
+        console.log(stateTags);
+        this.setState({tags:stateTags});
     }
 
     render()
@@ -35,10 +72,13 @@ class EntryBoxHandler extends React.Component
                 {
                     res.push(React.createElement(
                         EntryBox,
-                        {data:this.props.data[x],id:x,key:x}
+                        {data:this.props.data[x],id:x,key:x,updateTags:this.updateTags}
                     ));
 
-                    countTag(this.props.data[x].tags);
+                    if (!this.state.tagsReady)
+                    {
+                        this.updateTags(this.props.data[x].tags);
+                    }
                 }
 
                 console.log("hey");
@@ -48,7 +88,7 @@ class EntryBoxHandler extends React.Component
             (()=>{
                 if (this.state.tagsReady)
                 {
-                    return ReactDOM.createPortal(React.createElement(TagMenu,{tags:_tags}),document.querySelector(".menu-group"))
+                    return ReactDOM.createPortal(React.createElement(TagMenu,{tags:this.state.tags}),document.querySelector(".menu-group"))
                 }
 
                 return null;
@@ -57,7 +97,7 @@ class EntryBoxHandler extends React.Component
     }
 }
 
-//EntryBox(object data,int id)
+//EntryBox(object data,int id,function updateTags)
 //give it a data entry and id seperate
 class EntryBox extends React.Component
 {
@@ -109,7 +149,7 @@ class EntryBox extends React.Component
                 data.tags=[];
             }
 
-            countTag(data.tags,_hdb[this.props.id].tags);
+            this.props.updateTags(data.tags,_hdb[this.props.id].tags);
 
             _hdb[this.props.id]=data;
             chrome.storage.local.set({hdb:_hdb});
@@ -129,7 +169,7 @@ class EntryBox extends React.Component
     deleteSelf()
     {
         this.setState({dead:1});
-        countTag([],_hdb[this.props.id].tags);
+        this.props.updateTags([],_hdb[this.props.id].tags);
         delete _hdb[this.props.id];
         chrome.storage.local.set({hdb:_hdb});
     }
