@@ -145,6 +145,7 @@ input
     border-radius: 1.3px;
     cursor: pointer;
     transition: opacity .2s;
+    user-select: none;
     background-color: blueviolet;
 }
 

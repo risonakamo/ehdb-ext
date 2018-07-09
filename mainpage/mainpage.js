@@ -18,6 +18,7 @@ function main()
     });
 }
 
+//shuffle array in place
 function randomiseArray(array)
 {
     var t;

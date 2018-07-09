@@ -13,10 +13,12 @@ class EntryBoxHandler extends React.Component
             //tagsReady:0
             //shuffleActive:0
             tags:{},
-            data:this.props.data
+            data:this.props.data,
+            ids:Object.keys(this.props.data)
         };
     }
 
+    //tags have been processed
     tagsReady()
     {
         if (!this.state.tagsReady)
@@ -61,13 +63,14 @@ class EntryBoxHandler extends React.Component
             stateTags[oldTags[x]]--;
         }
 
-        console.log(stateTags);
         this.setState({tags:stateTags});
     }
 
+    //shuffle entries
     shuffleEntries()
     {
-        this.setState({shuffleActive:1});
+        randomiseArray(this.state.ids);
+        this.setState({ids:this.state.ids});
     }
 
     render()
@@ -76,25 +79,20 @@ class EntryBoxHandler extends React.Component
             (()=>{
                 var res=[];
 
-                for (var x in this.state.data)
+                var ids=this.state.ids;
+                for (var x=0,l=ids.length;x<l;x++)
                 {
                     res.push(React.createElement(
                         EntryBox,
-                        {data:this.state.data[x],id:x,key:x,updateTags:this.updateTags}
+                        {data:this.state.data[ids[x]],id:ids[x],key:ids[x],updateTags:this.updateTags}
                     ));
 
                     if (!this.state.tagsReady)
                     {
-                        this.updateTags(this.state.data[x].tags);
+                        this.updateTags(this.state.data[ids[x]].tags);
                     }
                 }
 
-                if (this.state.shuffleActive)
-                {
-                    randomiseArray(res);
-                }
-
-                console.log("hey");
                 return res;
             })(),
 
