@@ -9,7 +9,10 @@ class TagMenu extends React.Component
 
             for (var x in this.props.tags)
             {
-                res.push(React.createElement(TagMenuTag,{tagname:x,amount:this.props.tags[x],key:x}));
+                if (this.props.tags[x])
+                {
+                    res.push(React.createElement(TagMenuTag,{tagname:x,amount:this.props.tags[x],key:x}));
+                }
             }
 
             return res;
