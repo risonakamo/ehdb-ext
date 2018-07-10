@@ -99,29 +99,30 @@ class EntryBoxHandler extends React.Component
                 return res;
             })(),
 
-            React.createElement(
-                "a",
-                {
-                    key:"backuplink",
-                    href:"",
-                    className:"backup-link",
-                    download:"hdb.json",
-                    onClick:(e)=>{
-                        if (this.dataLoaded)
-                        {
-                            this.dataLoaded=0;
-                            return;
+            React.createElement("div",{className:"backup-link"},
+                React.createElement(
+                    "a",
+                    {
+                        key:"backuplink",
+                        href:"",
+                        download:"hdb.json",
+                        onClick:(e)=>{
+                            if (this.dataLoaded)
+                            {
+                                this.dataLoaded=0;
+                                return;
+                            }
+
+                            e.preventDefault();
+
+                            e.currentTarget.href=`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(Object.values(_hdb)))}`;
+                            this.dataLoaded=1;
+
+                            e.currentTarget.click();
                         }
-
-                        e.preventDefault();
-
-                        e.currentTarget.href=`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(Object.values(_hdb)))}`;
-                        this.dataLoaded=1;
-
-                        e.currentTarget.click();
-                    }
-                },
-                "Download Database Backup"
+                    },
+                    "Download Database Backup"
+                )
             ),
 
             //tag menu
