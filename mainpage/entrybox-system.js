@@ -66,6 +66,12 @@ class EntryBoxHandler extends React.Component
         for (var x=0,l=oldTags.length;x<l;x++)
         {
             stateTags[oldTags[x]]--;
+
+            //if that tag is now empty, remove it from the tag filter
+            if (!stateTags[oldTags[x]])
+            {
+                this.tagFilterSet(oldTags[x],0);
+            }
         }
 
         this.setState({tags:stateTags});
