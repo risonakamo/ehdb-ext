@@ -148,7 +148,7 @@ input
     cursor: pointer;
     transition: opacity .2s;
     user-select: none;
-    background-color: blueviolet;
+    background-color: #063da4;
 }
 
 .tags .tag:hover,.menu-group li:hover
