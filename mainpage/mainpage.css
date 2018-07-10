@@ -54,6 +54,8 @@ input
 .menu-bar
 {
     flex-basis: 250px;
+    height: 100%;
+    overflow: auto;
 }
 
 /*-- entry box --*/
