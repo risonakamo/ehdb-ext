@@ -1,5 +1,8 @@
 //TagMenu(object tags,function shuffleEntries)
-//give it the tags object with all the tags
+//TagMenu(object tags,function shuffleEntries,function setFilter)
+//tags: all the tags object
+//shuffleEntries: parent function that shuffles entries
+//setFilter: parent function to set a tag filter
 class TagMenu extends React.Component
 {
     render()
@@ -26,7 +29,8 @@ class TagMenu extends React.Component
                 {
                     if (this.props.tags[x])
                     {
-                        res.push(React.createElement(TagMenuTag,{tagname:x,amount:this.props.tags[x],key:x}));
+                        res.push(React.createElement(TagMenuTag,{tagname:x,amount:this.props.tags[x],
+                            key:x,setFilter:this.props.setFilter}));
                     }
                 }
 
@@ -36,7 +40,7 @@ class TagMenu extends React.Component
     }
 }
 
-//TagMenuTag(string tagname,int amount)
+//TagMenuTag(string tagname,int amount,function setFilter)
 class TagMenuTag extends React.Component
 {
     constructor(props)
@@ -54,11 +58,13 @@ class TagMenuTag extends React.Component
         if (!this.state.selected)
         {
             this.setState({selected:"selected"});
+            this.props.setFilter(this.props.tagname,1);
         }
 
         else
         {
             this.setState({selected:null});
+            this.props.setFilter(this.props.tagname,0);
         }
     }
 

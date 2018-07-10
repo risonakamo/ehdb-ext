@@ -9,6 +9,7 @@ class EntryBoxHandler extends React.Component
         this.updateTags=this.updateTags.bind(this);
         this.shuffleEntries=this.shuffleEntries.bind(this);
         this.checkTagFilter=this.checkTagFilter.bind(this);
+        this.tagFilterSet=this.tagFilterSet.bind(this);
 
         this.state={
             //tagsReady:0* it exists but later
@@ -98,6 +99,23 @@ class EntryBoxHandler extends React.Component
         return true;
     }
 
+    //set a tag in the tagfilter
+    //action=1 to add, 0 to remove
+    tagFilterSet(tag,action)
+    {
+        if (action)
+        {
+            this.state.tagFilter.add(tag);
+        }
+
+        else
+        {
+            this.state.tagFilter.delete(tag);
+        }
+
+        this.setState({tagFilter:this.state.tagFilter});
+    }
+
     render()
     {
         return [
@@ -118,7 +136,6 @@ class EntryBoxHandler extends React.Component
                         ));
                     }
 
-
                     if (!this.state.tagsReady)
                     {
                         this.updateTags(currentEntry.tags);
@@ -128,6 +145,7 @@ class EntryBoxHandler extends React.Component
                 return res;
             })(),
 
+            //the backup link
             React.createElement("div",{className:"backup-link",key:"backuplink"},
                 React.createElement(
                     "a",
@@ -153,13 +171,13 @@ class EntryBoxHandler extends React.Component
                 )
             ),
 
-            //tag menu
+            //the tag menu
             (()=>{
                 if (this.state.tagsReady)
                 {
                     return ReactDOM.createPortal(React.createElement(
                         TagMenu,
-                        {tags:this.state.tags,shuffleEntries:this.shuffleEntries}
+                        {tags:this.state.tags,shuffleEntries:this.shuffleEntries,setFilter:this.tagFilterSet}
                     ),document.querySelector(".menu-group"));
                 }
 
