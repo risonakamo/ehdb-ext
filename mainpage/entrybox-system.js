@@ -78,12 +78,12 @@ class EntryBoxHandler extends React.Component
         this.setState({ids:this.state.ids});
     }
 
-    //check if an entry should render according to the tagfilter
+    //check if an entry should NOT render according to the tagfilter
     checkTagFilter(entryTags)
     {
         if (!this.state.tagFilter.size)
         {
-            return true;
+            return false;
         }
 
         //an entry must have every tag in the tag filter (AND operation)
@@ -92,11 +92,11 @@ class EntryBoxHandler extends React.Component
         {
             if (!entryTags.has(x))
             {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     //set a tag in the tagfilter
@@ -128,13 +128,13 @@ class EntryBoxHandler extends React.Component
                 for (var x=0,l=ids.length;x<l;x++)
                 {
                     currentEntry=this.state.data[ids[x]];
-                    if (this.checkTagFilter(currentEntry.tags))
-                    {
-                        res.push(React.createElement(
-                            EntryBox,
-                            {data:currentEntry,id:ids[x],key:ids[x],updateTags:this.updateTags}
-                        ));
-                    }
+
+                    res.push(React.createElement(
+                        EntryBox,
+                        {data:currentEntry,id:ids[x],key:ids[x],
+                            updateTags:this.updateTags,
+                            filtered:this.checkTagFilter(currentEntry.tags)}
+                    ));
 
                     if (!this.state.tagsReady)
                     {
@@ -187,7 +187,7 @@ class EntryBoxHandler extends React.Component
     }
 }
 
-//EntryBox(object data,int id,function updateTags)
+//EntryBox(object data,int id,function updateTags,bool filtered)
 //give it a data entry and id seperate
 class EntryBox extends React.Component
 {
@@ -271,9 +271,15 @@ class EntryBox extends React.Component
             return null;
         }
 
+        var filtered="";
+        if (this.props.filtered)
+        {
+            var filtered="filtered";
+        }
+
         return React.createElement(
             "div",
-            {className:`entry-box ${this.state.data.type}`},
+            {className:`entry-box ${this.state.data.type} ${filtered}`},
 
             React.createElement(
                 "a",

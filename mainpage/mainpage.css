@@ -185,6 +185,11 @@ input
     user-select: none;
 }
 
+.entry-box.filtered
+{
+    display: none;
+}
+
 /*-- edit mode --*/
 .slider-hold
 {
