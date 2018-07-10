@@ -39,6 +39,7 @@ class EntryHandler extends React.Component
         this.saveCurrentEntries=this.saveCurrentEntries.bind(this);
         this.pushtoHdb=this.pushtoHdb.bind(this);
         this.enterConfirmMode=this.enterConfirmMode.bind(this);
+        this.processFileInput=this.processFileInput.bind(this);
 
         this.normalMenu=[["Save Entries","/icons/saveentries.png"],["Save To HDB","/icons/savemain.png"]];
 
@@ -46,9 +47,9 @@ class EntryHandler extends React.Component
             buttonState:this.normalMenu
         };
 
-        this.saveConfirm=0;
-
+        // this.saveConfirm=0;
         this.entries=[];
+        this.fileInput=React.createRef();
     }
 
     //entry element callback
@@ -130,6 +131,25 @@ class EntryHandler extends React.Component
         this.saveConfirm=1;
     }
 
+    //add entries from a json file to the db
+    processFileInput(e)
+    {
+        var file=e.currentTarget.files[0];
+
+        if (file.type!="application/json")
+        {
+            return;
+        }
+
+        var fr=new FileReader();
+
+        fr.onload=()=>{
+            console.log(JSON.parse(fr.result));
+        };
+
+        fr.readAsText(file);
+    }
+
     render()
     {
         return [
@@ -161,6 +181,30 @@ class EntryHandler extends React.Component
 
                         React.createElement("img",{src:this.state.buttonState[1][1]}),
                         React.createElement("div",null,this.state.buttonState[1][0])
+                    ),
+
+                    React.createElement(
+                        "div",
+                        {
+                            className:"button",
+                            key:3,
+                            onClick:()=>{
+                                this.fileInput.current.click();
+                            }
+                        },
+
+                        React.createElement("img",{src:"/icons/savemain.png"}),
+                        React.createElement("div",null,"Load Backup"),
+
+                        React.createElement(
+                            "input",
+                            {
+                                style:{display:"none"},
+                                type:"file",
+                                ref:this.fileInput,
+                                onChange:this.processFileInput
+                            }
+                        )
                     )
                 ],
                 document.querySelector(".controls")
