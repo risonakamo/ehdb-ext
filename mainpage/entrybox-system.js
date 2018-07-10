@@ -99,11 +99,10 @@ class EntryBoxHandler extends React.Component
                 return res;
             })(),
 
-            React.createElement("div",{className:"backup-link"},
+            React.createElement("div",{className:"backup-link",key:"backuplink"},
                 React.createElement(
                     "a",
                     {
-                        key:"backuplink",
                         href:"",
                         download:"hdb.json",
                         onClick:(e)=>{

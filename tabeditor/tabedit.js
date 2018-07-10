@@ -91,9 +91,12 @@ class EntryHandler extends React.Component
     }
 
     //add current editted entries to the hdb
-    pushtoHdb()
+    pushtoHdb(output)
     {
-        var output=this.getOutput();
+        if (!output)
+        {
+            output=this.getOutput();
+        }
 
         chrome.storage.local.get(["lastid","hdb"],(d)=>{
             if (!d.lastid)
@@ -144,7 +147,7 @@ class EntryHandler extends React.Component
         var fr=new FileReader();
 
         fr.onload=()=>{
-            console.log(JSON.parse(fr.result));
+            this.pushtoHdb(JSON.parse(fr.result));
         };
 
         fr.readAsText(file);
