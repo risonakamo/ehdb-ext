@@ -8,16 +8,18 @@ class EntryBoxHandler extends React.Component
         this.tagsReady=this.tagsReady.bind(this);
         this.updateTags=this.updateTags.bind(this);
         this.shuffleEntries=this.shuffleEntries.bind(this);
+        this.checkTagFilter=this.checkTagFilter.bind(this);
 
         this.state={
-            //tagsReady:0
-            //shuffleActive:0
+            //tagsReady:0* it exists but later
+            //shuffleActive:0*
             tags:{},
             data:this.props.data,
-            ids:Object.keys(this.props.data)
+            ids:Object.keys(this.props.data),
+            tagFilter:new Set()
         };
 
-        //this.downloadLoaded=0;
+        //this.downloadLoaded=0;*
     }
 
     //tags have been processed
@@ -75,6 +77,27 @@ class EntryBoxHandler extends React.Component
         this.setState({ids:this.state.ids});
     }
 
+    //check if an entry should render according to the tagfilter
+    checkTagFilter(entryTags)
+    {
+        if (!this.state.tagFilter.size)
+        {
+            return true;
+        }
+
+        //an entry must have every tag in the tag filter (AND operation)
+        entryTags=new Set(entryTags);
+        for (var x of this.state.tagFilter)
+        {
+            if (!entryTags.has(x))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     render()
     {
         return [
@@ -83,16 +106,22 @@ class EntryBoxHandler extends React.Component
                 var res=[];
 
                 var ids=this.state.ids;
+                var currentEntry;
                 for (var x=0,l=ids.length;x<l;x++)
                 {
-                    res.push(React.createElement(
-                        EntryBox,
-                        {data:this.state.data[ids[x]],id:ids[x],key:ids[x],updateTags:this.updateTags}
-                    ));
+                    currentEntry=this.state.data[ids[x]];
+                    if (this.checkTagFilter(currentEntry.tags))
+                    {
+                        res.push(React.createElement(
+                            EntryBox,
+                            {data:currentEntry,id:ids[x],key:ids[x],updateTags:this.updateTags}
+                        ));
+                    }
+
 
                     if (!this.state.tagsReady)
                     {
-                        this.updateTags(this.state.data[ids[x]].tags);
+                        this.updateTags(currentEntry.tags);
                     }
                 }
 
