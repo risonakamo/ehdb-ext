@@ -353,3 +353,18 @@ li.shuffle.shuffle-selected
 {
     padding-left: 10px;
 }
+
+/*-- backup link --*/
+.backup-link
+{
+    display: block;
+    font-size: 16px;
+    padding: 0 10px 10px 10px;
+    text-decoration: underline;
+    opacity: .6;
+}
+
+.backup-link:hover
+{
+    opacity: 1;
+}
