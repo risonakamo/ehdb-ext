@@ -87,7 +87,7 @@ class EntryBoxHandler extends React.Component
     //check if an entry should NOT render according to the tagfilter
     checkTagFilter(entryTags)
     {
-        if (!this.state.tagFilter.size)
+        if (!this.state.tagFilter.size || !entryTags)
         {
             return false;
         }
@@ -134,6 +134,11 @@ class EntryBoxHandler extends React.Component
                 for (var x=0,l=ids.length;x<l;x++)
                 {
                     currentEntry=this.state.data[ids[x]];
+
+                    if (!currentEntry)
+                    {
+                        continue;
+                    }
 
                     res.push(React.createElement(
                         EntryBox,
