@@ -1,12 +1,18 @@
 {
     "manifest_version":2,
     "name":"ehdb extend",
-    "version":"0.0",
+    "version":"1.0",
     "description":"ehdb2+ehdb tabhelper",
 
     "permissions":["tabs","storage"],
 
     "browser_action":{
         "default_popup":"popup2/popup2.html"
+    },
+
+    "icons":{
+        "16":"extensionicons/icon16.png",
+        "48":"extensionicons/icon48.png",
+        "128":"extensionicons/icon128.png"
     }
 }
