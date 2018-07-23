@@ -11,6 +11,8 @@ class EditPane extends React.Component
         super(props);
         this.toggleFit=this.toggleFit.bind(this);
         this.resetEdit=this.resetEdit.bind(this);
+        this.shortcutKeyAction=this.shortcutKeyAction.bind(this);
+        this.submitAction=this.submitAction.bind(this);
 
         this.state={
             data:{...this.props.data}
@@ -47,6 +49,7 @@ class EditPane extends React.Component
     }
 
     //reset the edit to correct data hopefully (basically cancel)
+    //also cancel action
     resetEdit()
     {
         var data=this.props.data;
@@ -59,6 +62,33 @@ class EditPane extends React.Component
         this.setState({data},()=>{
             this.props.updateParent();
         });
+    }
+
+    //event handler for key combos
+    shortcutKeyAction(e)
+    {
+        if (e.key=="Enter")
+        {
+            e.preventDefault();
+            this.submitAction();
+        }
+
+        else if (e.key=="Escape")
+        {
+            e.preventDefault();
+            this.resetEdit();
+        }
+    }
+
+    //perform save action
+    submitAction(e)
+    {
+        if (!Array.isArray(this.state.data.tags))
+        {
+            this.state.data.tags=this.state.data.tags.split(",");
+        }
+
+        this.props.updateParent(this.state.data);
     }
 
     render()
@@ -80,7 +110,8 @@ class EditPane extends React.Component
                             value:this.state.data[x[1]],
                             onChange:(e)=>{
                                 this.fieldChange(e,x[1]);
-                            }
+                            },
+                            onKeyDown:this.shortcutKeyAction
                         }
                     )
                 );
@@ -98,7 +129,8 @@ class EditPane extends React.Component
                         value:this.state.data.type,
                         onChange:(e)=>{
                             this.fieldChange(e,"type");
-                        }
+                        },
+                        onKeyDown:this.shortcutKeyAction
                     }
                 ),
                 React.createElement("div",{className:"label"},"img fit"),
@@ -121,14 +153,7 @@ class EditPane extends React.Component
                     "div",
                     {
                         className:"button bigger",
-                        onClick:()=>{
-                            if (!Array.isArray(this.state.data.tags))
-                            {
-                                this.state.data.tags=this.state.data.tags.split(",");
-                            }
-
-                            this.props.updateParent(this.state.data);
-                        }
+                        onClick:this.submitAction
                     },
                     "Save"
                 ),
@@ -137,9 +162,7 @@ class EditPane extends React.Component
                     "div",
                     {
                         className:"button bigger",
-                        onClick:()=>{
-                            this.resetEdit();
-                        }
+                        onClick:this.resetEdit
                     },
                     "Cancel"
                 ),
