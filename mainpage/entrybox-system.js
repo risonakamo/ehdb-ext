@@ -218,7 +218,11 @@ class EntryBoxHandler extends React.Component
                 }
 
                 return null;
-            })()
+            })(),
+
+            //the type menu
+            ReactDOM.createPortal(React.createElement(TypeMenu,
+                {setTypeFilter:this.setTypeFilter}),document.querySelector(".type-menu"))
         ];
     }
 }
