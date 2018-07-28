@@ -10,6 +10,8 @@ class EntryBoxHandler extends React.Component
         this.shuffleEntries=this.shuffleEntries.bind(this);
         this.checkTagFilter=this.checkTagFilter.bind(this);
         this.tagFilterSet=this.tagFilterSet.bind(this);
+        this.checkTypeFilter=this.checkTypeFilter.bind(this);
+        this.setTypeFilter=this.setTypeFilter.bind(this);
 
         this.state={
             //tagsReady:0* it exists but later
@@ -18,6 +20,7 @@ class EntryBoxHandler extends React.Component
             data:this.props.data,
             ids:Object.keys(this.props.data),
             tagFilter:new Set()
+            // typeFilter
         };
 
         //this.downloadLoaded=0;*
@@ -87,6 +90,7 @@ class EntryBoxHandler extends React.Component
     //check if an entry should NOT render according to the tagfilter
     checkTagFilter(entryTags)
     {
+        //if there are no tags in the tag filter
         if (!this.state.tagFilter.size || !entryTags)
         {
             return false;
@@ -122,6 +126,24 @@ class EntryBoxHandler extends React.Component
         this.setState({tagFilter:this.state.tagFilter});
     }
 
+    //check if an entry should NOT render according to type filter
+    checkTypeFilter(type)
+    {
+        //type filter is not active
+        if (!this.state.typeFilter || type==this.state.typeFilter)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    //set the type filter. null to reset
+    setTypeFilter(type)
+    {
+        this.setState({typeFilter:type});
+    }
+
     render()
     {
         return [
@@ -142,9 +164,12 @@ class EntryBoxHandler extends React.Component
 
                     res.push(React.createElement(
                         EntryBox,
-                        {data:currentEntry,id:ids[x],key:ids[x],
+                        {
+                            data:currentEntry,id:ids[x],key:ids[x],
                             updateTags:this.updateTags,
-                            filtered:this.checkTagFilter(currentEntry.tags)}
+                            filtered:(this.checkTagFilter(currentEntry.tags)
+                                ||this.checkTypeFilter(currentEntry.type))
+                        }
                     ));
 
                     if (!this.state.tagsReady)
