@@ -308,7 +308,7 @@ input
 .menu-group
 {
     list-style: none;
-    padding: 4px 10px 0 10px;
+    padding: 4px 10px 4px 10px;
 }
 
 .menu-group li
@@ -377,4 +377,32 @@ li.shuffle.shuffle-selected
 .backup-link a:hover
 {
     opacity: 1;
+}
+
+/*-- type tags --*/
+.type-tag-hold
+{
+    width: 80px;
+    margin: auto;
+}
+
+.type-tag
+{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #eb2955;
+    transition: opacity .2s,background-color .2s;
+    cursor: pointer;
+}
+
+.type-tag:hover
+{
+    opacity: .6;
+}
+
+.type-tag-hold.filter-active .type-tag:not(.selected)
+{
+    background-color: transparent;
 }

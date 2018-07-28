@@ -106,22 +106,22 @@
     background-color: #fe7431;
 }
 
-.entry-box.PX .tag
+.entry-box.PX .tag,.type-tag.PX
 {
     background-color: #1198f6;
 }
 
-.entry-box.HIT .tag
+.entry-box.HIT .tag,.type-tag.SAN
 {
     background-color: #d45049;
 }
 
-.entry-box.NH .tag
+.entry-box.NH .tag,.type-tag.NH
 {
     background-color: #eb2955;
 }
 
-.entry-box.NONE .tag
+.entry-box.NONE .tag,.type-tag.HIT
 {
     background-color: #171717;
 }
