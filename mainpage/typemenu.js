@@ -53,7 +53,9 @@ class TypeMenu extends React.Component
                         onClick:()=>{
                             this.activateSelect(i,x);
                         }
-                    }
+                    },
+
+                    React.createElement("img",{src:`../icons/${x}.png`})
                 );
             })
         );

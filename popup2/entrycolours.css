@@ -101,7 +101,7 @@
 }
 
 /*-- tag colours --*/
-.entry-box.SAN .tag
+.entry-box.SAN .tag,.type-tag.SAN
 {
     background-color: #fe7431;
 }
@@ -111,7 +111,7 @@
     background-color: #1198f6;
 }
 
-.entry-box.HIT .tag,.type-tag.SAN
+.entry-box.HIT .tag
 {
     background-color: #d45049;
 }
