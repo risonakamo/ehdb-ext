@@ -222,7 +222,10 @@ class EntryBoxHandler extends React.Component
 
             //the type menu
             ReactDOM.createPortal(React.createElement(TypeMenu,
-                {setTypeFilter:this.setTypeFilter}),document.querySelector(".type-menu"))
+                {setTypeFilter:this.setTypeFilter}),document.querySelector(".type-menu")),
+
+            //the tag editor
+            ReactDOM.createPortal(React.createElement(TagEditor),document.querySelector(".tag-edit-outer"))
         ];
     }
 }
