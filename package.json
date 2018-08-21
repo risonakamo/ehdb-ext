@@ -1,0 +1,9 @@
+{
+  "name": "ehdb-ext",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-react": "^6.24.1"
+  }
+}
