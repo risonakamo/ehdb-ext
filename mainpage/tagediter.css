@@ -69,3 +69,8 @@
 {
     font-size: 15px;
 }
+
+.tag .descriptor:focus
+{
+    outline: none;
+}
