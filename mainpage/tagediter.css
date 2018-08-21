@@ -1,0 +1,72 @@
+.tag-edit-outer
+{
+    position: absolute;
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.76);
+    z-index: 19;
+}
+
+.tag-edit
+{
+    position: absolute;
+    height: 90%;
+    min-width: 600px;
+    top: 50%;
+    left: 50%;
+    background-color: #181818;
+    transform: translate(-50%,-50%);
+    z-index: 20;
+}
+
+.tag-edit .tag-edit-title
+{
+    width: 100%;
+    height: 40px;
+    font-size: 23px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    padding-top: 4px;
+    box-sizing: border-box;
+}
+
+.tag-edit .edit-section
+{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+}
+
+.tag-edit .tag
+{
+
+}
+
+.tag .tag-content
+{
+    min-height: 60px;
+    box-sizing: border-box;
+    padding: 5px 38px 7px 38px;
+}
+
+.tag .tag-border
+{
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tag .tag-name
+{
+    font-size: 20px;
+    padding-right: 15px;
+    color: #00abff;
+}
+
+.tag .descriptor
+{
+    font-size: 15px;
+}
