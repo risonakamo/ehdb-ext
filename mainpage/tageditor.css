@@ -10,11 +10,13 @@
 
 .tag-edit
 {
+    display: flex;
     position: absolute;
     height: 90%;
     min-width: 600px;
     top: 50%;
     left: 50%;
+    flex-direction: column;
     background-color: #181818;
     transform: translate(-50%,-50%);
     border-radius: 2px;
@@ -28,6 +30,7 @@
     height: 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.75);
+    flex: 0 0 40px;
 }
 
 .tag-edit-title .title
@@ -43,6 +46,7 @@
 .tag-edit-title img
 {
     height: 100%;
+    align-self: center;
 }
 
 .tag-edit-title .close-button
@@ -59,6 +63,13 @@
 .tag-edit-title .close-button:active
 {
     background-color: rgba(235, 41, 85, 0.7);
+}
+
+.tag-edit .edit-section-holder
+{
+    flex: 1;
+    overflow: auto;
+    padding-bottom: 20px;
 }
 
 .tag-edit .edit-section

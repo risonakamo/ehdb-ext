@@ -1,3 +1,5 @@
+//TagEditor(object tags)
+//tags: tags state object also given to tag menu
 class TagEditor extends React.Component
 {
   render()
@@ -11,18 +13,30 @@ class TagEditor extends React.Component
           </span>
         </div>
 
-        <div className="edit-section">
-          {/* <div className="tag">
-            <div className="tag-content">
-              <span className="tag-name">hey</span>
-              <span className="descriptor" contenteditable>its something and would you start to feel bad freedom isnt free it costs folks like you and me and if we dont all chip in well never pay that bill freedom isnt free now theres a hefty fucking fee and if you dont throw in your buck o 5 who will.....</span>
-            </div>
-            <div className="tag-border"></div>
-          </div>           */}
-        </div>
+        <div className="edit-section-holder">
+          <div className="edit-section">
+            {(()=>{
+              var res=[];
+              for (var x in this.props.tags)
+              {
+                res.push(
+                  <div className="tag" key={x}>
+                    <div className="tag-content">
+                      <span className="tag-name">{x}</span>
+                      <span className="descriptor" contentEditable></span>
+                    </div>
+                    <div className="tag-border"></div>
+                  </div>
+                );
+              }
 
-        <div className="edit-section">
+              return res;
+            })()}
+          </div>
 
+          <div className="edit-section">
+
+          </div>
         </div>
       </div>
     );
