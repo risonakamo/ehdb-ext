@@ -14,29 +14,30 @@ class TagEditor extends React.Component
         </div>
 
         <div className="edit-section-holder">
-          <div className="edit-section">
-            {(()=>{
-              var res=[];
-              for (var x in this.props.tags)
-              {
-                res.push(
-                  <div className="tag" key={x}>
-                    <div className="tag-content">
-                      <span className="tag-name">{x}</span>
-                      <span className="descriptor" contentEditable></span>
-                    </div>
-                    <div className="tag-border"></div>
+          {(()=>{
+            var reses=[[],[]];
+            var currentRes=0;
+
+            for (var x in this.props.tags)
+            {
+              reses[currentRes].push(
+                <div className="tag" key={x}>
+                  <div className="tag-content">
+                    <span className="tag-name">{x}</span>
+                    <span className="descriptor" contentEditable></span>
                   </div>
-                );
-              }
+                  <div className="tag-border"></div>
+                </div>
+              );
 
-              return res;
-            })()}
-          </div>
+              currentRes=currentRes?0:1;
+            }
 
-          <div className="edit-section">
-
-          </div>
+            return [
+              <div className="edit-section" key={0}>{reses[0]}</div>,
+              <div className="edit-section" key={1}>{reses[1]}</div>
+            ];
+          })()}
         </div>
       </div>
     );

@@ -22,33 +22,40 @@ class TagEditor extends React.Component {
       React.createElement(
         "div",
         { className: "edit-section-holder" },
-        React.createElement(
-          "div",
-          { className: "edit-section" },
-          (() => {
-            var res = [];
-            for (var x in this.props.tags) {
-              res.push(React.createElement(
-                "div",
-                { className: "tag", key: x },
-                React.createElement(
-                  "div",
-                  { className: "tag-content" },
-                  React.createElement(
-                    "span",
-                    { className: "tag-name" },
-                    x
-                  ),
-                  React.createElement("span", { className: "descriptor", contentEditable: true })
-                ),
-                React.createElement("div", { className: "tag-border" })
-              ));
-            }
+        (() => {
+          var reses = [[], []];
+          var currentRes = 0;
 
-            return res;
-          })()
-        ),
-        React.createElement("div", { className: "edit-section" })
+          for (var x in this.props.tags) {
+            reses[currentRes].push(React.createElement(
+              "div",
+              { className: "tag", key: x },
+              React.createElement(
+                "div",
+                { className: "tag-content" },
+                React.createElement(
+                  "span",
+                  { className: "tag-name" },
+                  x
+                ),
+                React.createElement("span", { className: "descriptor", contentEditable: true })
+              ),
+              React.createElement("div", { className: "tag-border" })
+            ));
+
+            currentRes = currentRes ? 0 : 1;
+          }
+
+          return [React.createElement(
+            "div",
+            { className: "edit-section", key: 0 },
+            reses[0]
+          ), React.createElement(
+            "div",
+            { className: "edit-section", key: 1 },
+            reses[1]
+          )];
+        })()
       )
     );
   }
