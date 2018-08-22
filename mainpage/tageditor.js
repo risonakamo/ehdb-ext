@@ -56,6 +56,8 @@ class TagEditor extends React.Component {
     this.tagEditOuter.classList.toggle("enabled");
   }
 
+  //push tag descriptions to storage
+  //happens on tag editor closing
   saveTagDescriptions() {
     var currentTag;
     for (var x = 0, l = this.editTagElements.length; x < l; x++) {
@@ -67,6 +69,11 @@ class TagEditor extends React.Component {
     }
 
     chrome.storage.local.set({ tagDescriptions: this.state.tagData });
+  }
+
+  //used by backup functions. returns the tagdata from this object
+  getTagData() {
+    return this.state.tagData;
   }
 
   render() {

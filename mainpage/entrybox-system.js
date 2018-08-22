@@ -24,6 +24,8 @@ class EntryBoxHandler extends React.Component
         };
 
         //this.downloadLoaded=0;*
+
+        this.tagEditor=React.createRef(); //the tag editor component
     }
 
     //tags have been processed
@@ -197,7 +199,10 @@ class EntryBoxHandler extends React.Component
 
                             e.preventDefault();
 
-                            e.currentTarget.href=`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(Object.values(_hdb)))}`;
+                            e.currentTarget.href=`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify({
+                                db:Object.values(_hdb),
+                                tagDescriptions:this.tagEditor.current.getTagData()
+                            }))}`;
                             this.dataLoaded=1;
 
                             e.currentTarget.click();
@@ -230,7 +235,7 @@ class EntryBoxHandler extends React.Component
                 {
                     return ReactDOM.createPortal(React.createElement(
                         TagEditor,
-                        {tags:this.state.tags}
+                        {tags:this.state.tags,ref:this.tagEditor}
                     ),document.querySelector(".tag-edit-outer"));
                 }
             })()
