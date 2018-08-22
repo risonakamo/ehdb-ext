@@ -9,13 +9,35 @@ class TagEditor extends React.Component {
     this.tagEditLoaded = this.tagEditLoaded.bind(this);
 
     this.state = {
-      enabled: false
+      enabled: false,
+      tagData: {} //contains description data from localstorage
     };
 
     //array of all edit tag elements
     this.editTagElements = [];
+    //this.firstMount;* if first mount has happened
 
     document.querySelector(".tag-title").addEventListener("click", this.toggleOpenEditor);
+  }
+
+  componentDidMount() {
+    if (this.firstMount) {
+      return;
+    }
+
+    //should only grab the descriptions once. after that the tagData state
+    //variable should always be up to date unless there are 2 windows
+    chrome.storage.local.get("tagDescriptions", data => {
+      data = data.tagDescriptions;
+
+      if (!data) {
+        data = {};
+      }
+
+      this.setState({ tagData: data });
+    });
+
+    this.firstMount = 1;
   }
 
   //when main element is loaded
@@ -35,9 +57,16 @@ class TagEditor extends React.Component {
   }
 
   saveTagDescriptions() {
+    var currentTag;
     for (var x = 0, l = this.editTagElements.length; x < l; x++) {
-      console.log(this.editTagElements[x].returnTagData());
+      currentTag = this.editTagElements[x].returnTagData();
+
+      if (currentTag[1].length > 0) {
+        this.state.tagData[currentTag[0]] = currentTag[1];
+      }
     }
+
+    chrome.storage.local.set({ tagDescriptions: this.state.tagData });
   }
 
   render() {
@@ -69,7 +98,7 @@ class TagEditor extends React.Component {
           var currentRes = 0;
 
           for (var x in this.props.tags) {
-            reses[currentRes].push(React.createElement(EditTag, { tagName: x, ref: this.tagEditLoaded, key: x }));
+            reses[currentRes].push(React.createElement(EditTag, { tagName: x, description: this.state.tagData[x], ref: this.tagEditLoaded, key: x }));
 
             currentRes = currentRes ? 0 : 1;
           }
