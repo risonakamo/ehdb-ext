@@ -98,7 +98,8 @@ class TagEditor extends React.Component {
           var currentRes = 0;
 
           for (var x in this.props.tags) {
-            reses[currentRes].push(React.createElement(EditTag, { tagName: x, description: this.state.tagData[x], ref: this.tagEditLoaded, key: x }));
+            reses[currentRes].push(React.createElement(EditTag, { tagName: x, description: this.state.tagData[x],
+              toggleOpenEditor: this.toggleOpenEditor, ref: this.tagEditLoaded, key: x }));
 
             currentRes = currentRes ? 0 : 1;
           }
@@ -118,9 +119,10 @@ class TagEditor extends React.Component {
   }
 }
 
-//EditTag(string tagName,string description)
+//EditTag(string tagName,string description,function toggleOpenEditor)
 //tagName: the name of the tag
 //description: description to initialise the tag edit with
+//toggleOpenEditor: function from parent
 class EditTag extends React.Component {
   constructor(props) {
     super(props);
@@ -150,7 +152,12 @@ class EditTag extends React.Component {
           "span",
           { className: "descriptor", contentEditable: true,
             ref: this.descriptionElement,
-            suppressContentEditableWarning: true
+            suppressContentEditableWarning: true,
+            onKeyDown: e => {
+              if (e.key == "Escape") {
+                this.props.toggleOpenEditor();
+              }
+            }
           },
           this.props.description
         )
