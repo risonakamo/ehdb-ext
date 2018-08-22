@@ -4,14 +4,24 @@ class TagEditor extends React.Component {
   constructor(props) {
     super(props);
     this.elementLoaded = this.elementLoaded.bind(this);
+    this.toggleOpenEditor = this.toggleOpenEditor.bind(this);
 
-    this.state = {};
+    this.state = {
+      enabled: false
+    };
 
     //this.tagEditOuter* the outside parent element. loaded by elementLoaded()
+
+    document.querySelector(".tag-title").addEventListener("click", this.toggleOpenEditor);
   }
 
   elementLoaded(ref) {
     this.tagEditOuter = ref.parentElement;
+  }
+
+  toggleOpenEditor() {
+    this.state.enabled = !this.state.enabled;
+    this.tagEditOuter.classList.toggle("enabled");
   }
 
   render() {
@@ -28,9 +38,7 @@ class TagEditor extends React.Component {
         ),
         React.createElement(
           "span",
-          { className: "close-button", onClick: () => {
-              this.tagEditOuter.classList.toggle("enabled");
-            } },
+          { className: "close-button", onClick: this.toggleOpenEditor },
           React.createElement("img", { src: "../icons/naw.png" })
         )
       ),

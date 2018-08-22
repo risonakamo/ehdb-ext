@@ -12,7 +12,7 @@ function main()
             _hdb={};
         }
 
-        console.log(_hdb);
+        // console.log(_hdb);
 
         ReactDOM.render(React.createElement(EntryBoxHandler,{data:_hdb}),document.querySelector(".entries"));
     });
