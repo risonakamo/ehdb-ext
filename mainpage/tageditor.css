@@ -38,6 +38,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.75);
     flex: 0 0 40px;
+    align-items: center;
 }
 
 .tag-edit-title .title
@@ -58,6 +59,7 @@
 
 .tag-edit-title .close-button
 {
+    height: 100%;
     transition: background-color .2s;
     cursor: pointer;
 }
