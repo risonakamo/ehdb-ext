@@ -1,11 +1,18 @@
 .tag-edit-outer
 {
+    display: none;
     position: absolute;
-    /* display: none; */
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.76);
+    opacity: 0;
     z-index: 19;
+}
+
+.tag-edit-outer.enabled
+{
+    opacity: 1;
+    display: block;
 }
 
 .tag-edit

@@ -2,13 +2,33 @@
 //tags: tags state object also given to tag menu
 class TagEditor extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+    this.elementLoaded=this.elementLoaded.bind(this);
+
+    this.state={
+      enabled:false
+    };
+
+    //this.tagEditOuter* the outside parent element. loaded by elementLoaded()
+  }
+
+  elementLoaded(ref)
+  {
+    this.tagEditOuter=ref.parentElement;
+  }
+
   render()
   {
     return (
-      <div className="tag-edit">
+      <div className="tag-edit" ref={this.elementLoaded}>
         <div className="tag-edit-title">
           <span className="title">TAGS</span>
-          <span className="close-button">
+          <span className="close-button" onClick={()=>{
+            this.tagEditOuter.classList.remove("enabled");
+            this.state.enabled=false;
+          }}>
             <img src="../icons/naw.png"/>
           </span>
         </div>
