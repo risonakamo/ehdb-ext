@@ -333,6 +333,8 @@ class EntryBox extends React.Component
             var filtered="filtered";
         }
 
+        this.state.data.tags.sort();
+
         return React.createElement(
             "div",
             {className:`entry-box ${this.state.data.type} ${filtered}`},

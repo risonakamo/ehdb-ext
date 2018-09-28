@@ -25,12 +25,17 @@ class TagMenu extends React.Component
             (()=>{
                 var res=[];
 
-                for (var x in this.props.tags)
+                var tagNames=Object.keys(this.props.tags);
+                tagNames.sort();
+
+                var currentTag;
+                for (var x=0,l=tagNames.length;x<l;x++)
                 {
-                    if (this.props.tags[x])
+                    currentTag=tagNames[x];
+                    if (this.props.tags[currentTag])
                     {
-                        res.push(React.createElement(TagMenuTag,{tagname:x,amount:this.props.tags[x],
-                            key:x,setFilter:this.props.setFilter}));
+                        res.push(React.createElement(TagMenuTag,{tagname:currentTag,amount:this.props.tags[currentTag],
+                            key:currentTag,setFilter:this.props.setFilter}));
                     }
                 }
 

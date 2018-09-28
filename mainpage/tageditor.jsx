@@ -107,10 +107,15 @@ class TagEditor extends React.Component
             var reses=[[],[]];
             var currentRes=0;
 
-            for (var x in this.props.tags)
+            var tagNames=Object.keys(this.props.tags);
+            var currentTag;
+            tagNames.sort();
+            for (var x=0,l=tagNames.length;x<l;x++)
             {
-              reses[currentRes].push(<EditTag tagName={x} description={this.state.tagData[x]}
-                toggleOpenEditor={this.toggleOpenEditor} ref={this.tagEditLoaded} key={x}/>);
+              currentTag=tagNames[x];
+
+              reses[currentRes].push(<EditTag tagName={currentTag} description={this.state.tagData[currentTag]}
+                toggleOpenEditor={this.toggleOpenEditor} ref={this.tagEditLoaded} key={currentTag}/>);
 
               currentRes=currentRes?0:1;
             }
