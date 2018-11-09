@@ -317,7 +317,7 @@ class Entry extends React.Component
                 React.createElement(
                     "dd",
                     {className:"number"},
-                    this.props.index
+                    React.createElement("a",{href:this.props.data.url},this.props.index)
                 ),
 
                 React.createElement(
