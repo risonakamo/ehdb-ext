@@ -153,6 +153,11 @@ class EntryHandler extends React.Component
         fr.readAsText(file);
     }
 
+    openAllEntries()
+    {
+
+    }
+
     render()
     {
         return [
