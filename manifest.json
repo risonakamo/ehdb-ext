@@ -3,6 +3,7 @@
     "name":"ehdb extend",
     "version":"1.6",
     "description":"ehdb2+ehdb tabhelper",
+    "homepage_url":"https://github.com/risonakamo/ehdb-ext",
 
     "permissions":["tabs","storage"],
 
