@@ -9,7 +9,7 @@ class TypeMenu extends React.Component
 
         this.state={
             filterActive:"",
-            selectedType:["","","",""]
+            selectedType:["","","","",""]
         };
     }
 
@@ -24,7 +24,7 @@ class TypeMenu extends React.Component
             return;
         }
 
-        for (var x=0;x<4;x++)
+        for (var x=0;x<5;x++)
         {
             if (x==index)
             {
@@ -44,7 +44,7 @@ class TypeMenu extends React.Component
     render()
     {
         return React.createElement("div",{className:`type-tag-hold ${this.state.filterActive}`},
-            ["PX","HIT","NH","SAN"].map((x,i)=>{
+            ["PX","HIT","NH","SAN","DL"].map((x,i)=>{
                 return React.createElement(
                     "div",
                     {
