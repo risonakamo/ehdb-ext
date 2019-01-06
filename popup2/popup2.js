@@ -54,6 +54,12 @@ function processTabjson(tab)
         res.type="HIT";
     }
 
+    else if (tab.url.slice(0,22)=="https://www.dlsite.com")
+    {
+        res.title=tab.title.match(/(.*)\s+サークルプロフィール \|/)[1];
+        res.type="DL";
+    }
+
     else
     {
         res.title=tab.title;
