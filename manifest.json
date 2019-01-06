@@ -1,7 +1,7 @@
 {
     "manifest_version":2,
     "name":"ehdb extend",
-    "version":"1.6",
+    "version":"1.7",
     "description":"ehdb2+ehdb tabhelper",
     "homepage_url":"https://github.com/risonakamo/ehdb-ext",
 
