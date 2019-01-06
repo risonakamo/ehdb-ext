@@ -74,6 +74,24 @@
     background-color: #400904;
 }
 
+.bar.DL,.bar.DL:nth-of-type(2n) .title,.entry.DL dd,.entry.DL:nth-of-type(2n) dd:nth-of-type(2n)
+{
+    /* medium colour */
+    background-color: #414a53;
+}
+
+.bar.DL .title,.entry.DL dd:nth-of-type(2n),.entry-box.DL .title
+{
+    /* light colour */
+    background-color: #4d5760;
+}
+
+.bar.DL:nth-of-type(2n),.entry.DL:nth-of-type(2n) dd,.entry-box.DL
+{
+    /* dark colour */
+    background-color: #343c43;
+}
+
 /*-- entry box borders --*/
 .entry-box.SAN
 {
@@ -100,6 +118,11 @@
     border: 2px solid #5d110a;
 }
 
+.entry-box.DL
+{
+    border: 2px solid #4d5760;
+}
+
 /*-- tag colours --*/
 .entry-box.SAN .tag,.type-tag.SAN
 {
@@ -124,4 +147,9 @@
 .entry-box.NONE .tag,.type-tag.HIT
 {
     background-color: #171717;
+}
+
+.entry-box.NH .tag,.type-tag.NH
+{
+    background-color: #607191;
 }
