@@ -147,7 +147,25 @@ class EntryHandler extends React.Component
         var fr=new FileReader();
 
         fr.onload=()=>{
-            this.pushtoHdb(JSON.parse(fr.result));
+            var result=JSON.parse(fr.result);
+            this.pushtoHdb(result.db);
+
+            //merge tag description backup
+            chrome.storage.local.get("tagDescriptions",(data)=>{
+                if (!data.tagDescriptions)
+                {
+                    data={};
+                }
+
+                else
+                {
+                    data=data.tagDescriptions;
+                }
+
+                data={...data,...result.tagDescriptions};
+
+                chrome.storage.local.set("tagDescriptions",data);
+            });
         };
 
         fr.readAsText(file);

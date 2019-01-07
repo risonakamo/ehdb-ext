@@ -1,0 +1,8 @@
+#json object outputted by backup functionality
+type BackupOutput
+{
+    db:[HdbEntry], #HdbEntry object from localstorage data def
+
+    #literally whole tag descriptions object from local storage def
+    tagDescriptions:TagDescriptionsObject
+}
