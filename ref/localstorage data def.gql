@@ -1,0 +1,52 @@
+#the whole local storage
+type localStorage
+{
+    currentTabs:[TabInfo], #tab info objects saved when user used "save tabs"
+    hdb:TheHdbObject,
+    lastid:int, #the last id to be used when adding a new entry
+    tagDescriptions:TagDescriptionsObject
+}
+
+#describes a saved tab
+type TabInfo
+{
+    title:string,
+    type:TabType,
+    url:tring
+}
+
+#enum for possible tab types used around the program
+enum TabType
+{
+    NONE,
+    NH,
+    SAN,
+    PX,
+    HIT,
+    DL
+}
+
+#object storing all hdb entries. keys are each entries id, values
+#are the entry objects
+type TheHdbObject
+{
+    [entryId]:HdbEntry
+}
+
+#an entry in the database
+type HdbEntry
+{
+    fit:{TALL,WIDE}, #an enum on for fitting of the image
+    imglink:string,
+    tags:[string],
+    title:string,
+    type:TabType,
+    url:string
+}
+
+#object holding all tag descriptions stored
+type TagDescriptionsObject
+{
+    [tagNames]:string #keys are tag names, paired with
+                      #the description of the tag
+}
