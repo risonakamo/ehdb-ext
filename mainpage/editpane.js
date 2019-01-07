@@ -22,6 +22,8 @@ class EditPane extends React.Component
         {
             this.state.data.fit="TALL";
         }
+
+        this.deleteButton=React.createRef(); //the delete button
     }
 
     //toggle img fit button function
@@ -59,6 +61,8 @@ class EditPane extends React.Component
             data.fit="TALL";
         }
 
+        this.deleteButton.current.resetConfirm();
+
         this.setState({data},()=>{
             this.props.updateParent();
         });
@@ -88,6 +92,7 @@ class EditPane extends React.Component
             this.state.data.tags=this.state.data.tags.split(",");
         }
 
+        this.deleteButton.current.resetConfirm();
         this.props.updateParent(this.state.data);
     }
 
@@ -167,15 +172,61 @@ class EditPane extends React.Component
                     "Cancel"
                 ),
 
-                React.createElement(
-                    "div",
-                    {
-                        className:"button delete",
-                        onClick:this.props.doDelete
-                    },
-                    "Delete"
-                )
+                React.createElement(deleteButton,{doDelete:this.props.doDelete,ref:this.deleteButton})
             )
+        );
+    }
+}
+
+//the delete button
+//deleteButton(parent-function doDelete)
+//doDelete: function from parent EditPane
+class deleteButton extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.showConfirm=this.showConfirm.bind(this);
+
+        this.state={
+            //confirmDelete:0 //indicates if confirm delete is showing
+        };
+    }
+
+    showConfirm()
+    {
+        this.setState({confirmDelete:1});
+    }
+
+    //public, reset the confirmation state
+    resetConfirm()
+    {
+        this.setState({confirmDelete:0});
+    }
+
+    render()
+    {
+        var buttonAction;
+        var buttonText;
+        if (!this.state.confirmDelete)
+        {
+            buttonAction=this.showConfirm;
+            buttonText="Delete";
+        }
+
+        else
+        {
+            buttonAction=this.props.doDelete;
+            buttonText="Really?";
+        }
+
+        return React.createElement(
+            "div",
+            {
+                className:"button delete",
+                onClick:buttonAction
+            },
+            buttonText
         );
     }
 }
