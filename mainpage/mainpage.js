@@ -4,6 +4,8 @@ var _hdb;
 
 function main()
 {
+    var entries=document.querySelector(".entries");
+    entries.focus();
     chrome.storage.local.get("hdb",(d)=>{
         _hdb=d.hdb;
 
@@ -14,7 +16,7 @@ function main()
 
         // console.log(_hdb);
 
-        ReactDOM.render(React.createElement(EntryBoxHandler,{data:_hdb}),document.querySelector(".entries"));
+        ReactDOM.render(React.createElement(EntryBoxHandler,{data:_hdb}),entries);
     });
 }
 
